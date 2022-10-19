@@ -2,7 +2,9 @@ package dev.hammet.repositories;
 
 import dev.hammet.entities.Employee;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EmployeeDAOLocal implements EmployeeDAO {
@@ -24,9 +26,20 @@ public class EmployeeDAOLocal implements EmployeeDAO {
     }
 
     @Override
+    public List<Employee> getAllEmployees() {
+        List<Employee> employeeList = new ArrayList<>();
+        employeeTable.forEach((key, value) -> {
+            employeeList.add(value);
+        });
+        return employeeList;
+
+    }
+
+    @Override
     public Employee updateEmployee(Employee employee) {
         return employeeTable.put(employee.getId(), employee);
     }
+
 
     @Override
     public boolean deleteEmployeeById(int id) {

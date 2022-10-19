@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="trying commit from inside intellij" />
+    <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="committing from intellij">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/dev/hammet/daotests/EmployeeDAOTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/dev/hammet/daotests/EmployeeDAOTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOLocal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOLocal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOPostgres.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOPostgres.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/dev/hammet/daotests/EmployeeDAOTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/dev/hammet/daotests/EmployeeDAOTests.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,23 +58,7 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.ConnectionTests.connection_available">
-    <configuration name="ConnectionTests.connection_available" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ERS_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="dev.hammet.smoketests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="dev.hammet.smoketests" />
-      <option name="MAIN_CLASS_NAME" value="dev.hammet.smoketests.ConnectionTests" />
-      <option name="METHOD_NAME" value="connection_available" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.EmployeeDAOTests.delete_employee_by_id_test">
     <configuration name="EmployeeDAOTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ERS_Project" />
       <extension name="coverage">
@@ -91,6 +85,22 @@
       <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
       <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
       <option name="METHOD_NAME" value="delete_employee_by_id_test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmployeeDAOTests.get_all_employees_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ERS_Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.hammet.daotests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
+      <option name="METHOD_NAME" value="get_all_employees_test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -130,9 +140,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ConnectionTests.connection_available" />
         <item itemvalue="JUnit.EmployeeDAOTests.delete_employee_by_id_test" />
         <item itemvalue="JUnit.EmployeeDAOTests.update_employee_test" />
+        <item itemvalue="JUnit.EmployeeDAOTests.get_all_employees_test" />
         <item itemvalue="JUnit.EmployeeDAOTests.get_employee_by_id_test" />
         <item itemvalue="JUnit.EmployeeDAOTests" />
       </list>
@@ -161,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666218395670</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="committing from intellij">
+      <created>1666218641332</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1666218641332</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -177,6 +194,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="trying commit from inside intellij" />
-    <option name="LAST_COMMIT_MESSAGE" value="trying commit from inside intellij" />
+    <MESSAGE value="committing from intellij" />
+    <option name="LAST_COMMIT_MESSAGE" value="committing from intellij" />
   </component>
 </project>

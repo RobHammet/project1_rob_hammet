@@ -4,6 +4,8 @@ import dev.hammet.entities.Employee;
 import dev.hammet.util.ConnectionFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeDAOPostgres implements EmployeeDAO {
     @Override
@@ -54,6 +56,38 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             employee.setManager(rs.getBoolean("isManager"));
 
             return employee;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Employee> getAllEmployees() {
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String sql = "select * from employees";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            // The class PreparedStatement has a method called prepareStatement (no d) that takes in a string
+           // ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+          //  rs.next();
+
+            List<Employee> employeeList = new ArrayList<>();
+
+            while (rs.next()) {
+
+                Employee employee = new Employee();
+                employee.setId(rs.getInt("id"));
+                employee.setUsername(rs.getString("username"));
+                employee.setPassword(rs.getString("password"));
+                employee.setManager(rs.getBoolean("isManager"));
+                employeeList.add(employee);
+            }
+
+            return employeeList;
+
 
         } catch (SQLException e) {
             e.printStackTrace();

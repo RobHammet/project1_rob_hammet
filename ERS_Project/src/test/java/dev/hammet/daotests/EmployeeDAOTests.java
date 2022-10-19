@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class EmployeeDAOTests {
 
     static EmployeeDAO employeeDAO = new EmployeeDAOPostgres();
@@ -27,6 +29,16 @@ public class EmployeeDAOTests {
     }
     @Test
     @Order(3)
+    void get_all_employees_test(){
+
+        List<Employee> allEmployees = employeeDAO.getAllEmployees();
+        for (Employee e : allEmployees) {
+            System.out.println(e.toString());
+        }
+        Assertions.assertEquals(1,allEmployees.size());
+    }
+    @Test
+    @Order(4)
     void update_employee_test(){
         //When testing update, you should either get the book and use its values or create a completely new book and use those values
         Employee employee = employeeDAO.getEmployeeById(1);
@@ -37,7 +49,7 @@ public class EmployeeDAOTests {
         Assertions.assertEquals("hunter3",updatedEmployee.getPassword());
     }
     @Test
-    @Order(4)
+    @Order(5)
     void delete_employee_by_id_test(){
         boolean result = employeeDAO.deleteEmployeeById(1);
         Assertions.assertTrue(result);

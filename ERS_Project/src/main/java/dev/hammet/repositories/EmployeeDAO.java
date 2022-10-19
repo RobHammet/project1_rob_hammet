@@ -2,6 +2,8 @@ package dev.hammet.repositories;
 
 import dev.hammet.entities.Employee;
 
+import java.util.List;
+
 
 public interface EmployeeDAO {
 
@@ -10,6 +12,7 @@ public interface EmployeeDAO {
 
     //READ
     Employee getEmployeeById(int id);
+    List<Employee> getAllEmployees();
 
     //UPDATE
     Employee updateEmployee(Employee employee);
