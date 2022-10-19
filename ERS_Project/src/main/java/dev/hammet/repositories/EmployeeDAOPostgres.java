@@ -14,7 +14,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             // Here is the unfun thing about JDBC, you have to write SQL statements in Java
             // I recommend putting in comments the SQL command you are trying to execute
             //INSERT INTO books VALUES (DEFAULT, 'Great Gatsby', 'F. Scott Fitts Jerald', 0);
-            String sql = "insert into books values(default, ?, ? , ?)";
+            String sql = "insert into employees values(default, ?, ? , ?)";
             // The only thing in the sql String that isnt "just a string" are the question marks
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             //Parameters START at 1, they are not indexed at 0
@@ -39,7 +39,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
     @Override
     public Employee getEmployeeById(int id) {
         try (Connection connection = ConnectionFactory.getConnection()) {
-            String sql = "select * from books where id = ?";
+            String sql = "select * from employees where id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             // The class PreparedStatement has a method called prepareStatement (no d) that takes in a string
             ps.setInt(1, id);

@@ -3,7 +3,6 @@ package dev.hammet.services;
 import dev.hammet.entities.Employee;
 import dev.hammet.repositories.EmployeeDAO;
 
-import java.sql.SQLException;
 
 public class EmployeeServiceImplementation implements EmployeeService {
 
@@ -23,17 +22,20 @@ public class EmployeeServiceImplementation implements EmployeeService {
             throw new RuntimeException("Password cannot be empty");
         }
         Employee savedEmployee = this.employeeDAO.createEmployee(employee);
+
+        System.out.println(savedEmployee.toString());
+
         return savedEmployee;
     }
 
     @Override
     public Employee getEmployeeById(int id) {
-        try{
+       // try{
             return this.employeeDAO.getEmployeeById(id);
-        } catch(SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+//        } catch(SQLException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
     }
 
     @Override

@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/hammet/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/driver/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/hammet/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOLocal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOLocal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOPostgres.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOPostgres.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/services/EmployeeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/services/EmployeeServiceImplementation.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,15 +48,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.dev.hammet.driver.Driver">
     <configuration name="Driver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.hammet.driver.Driver" />

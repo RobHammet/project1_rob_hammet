@@ -7,12 +7,12 @@ import java.util.Map;
 
 public class EmployeeDAOLocal implements EmployeeDAO {
     private Map<Integer,Employee> employeeTable = new HashMap();
-    private int idCount = 0;
+    private int idCount = 1;
 
     @Override
     public Employee createEmployee(Employee employee) {
-        idCount++;
         employee.setId(idCount);
+        idCount++;
         employeeTable.put(employee.getId(), employee);
         System.out.println(employeeTable.values());
         return employee;
