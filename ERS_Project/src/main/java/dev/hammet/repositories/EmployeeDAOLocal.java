@@ -30,6 +30,7 @@ public class EmployeeDAOLocal implements EmployeeDAO {
 
     @Override
     public boolean deleteEmployeeById(int id) {
+
         Employee employee = employeeTable.remove(id); //This removes method returns the object that was removed from the map
         if(employee == null){
             return false;

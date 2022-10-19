@@ -6,15 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOLocal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOLocal.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOPostgres.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOPostgres.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/services/EmployeeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/services/EmployeeServiceImplementation.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +37,9 @@
     </option>
   </component>
   <component name="ProjectId" id="2GMiwplnIwvHHNCJm5PEG54umyH" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -57,37 +53,93 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.dev.hammet.driver.Driver">
-    <configuration name="Driver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.hammet.driver.Driver" />
+  <component name="RunManager" selected="JUnit.EmployeeDAOTests.delete_employee_by_id_test">
+    <configuration name="EmployeeDAOTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ERS_Project" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.hammet.driver.*" />
+          <option name="PATTERN" value="dev.hammet.daotests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="dev.hammet.driver.Driver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="dev.hammet.driver.Driver" />
+    <configuration name="EmployeeDAOTests.create_employee_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ERS_Project" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="dev.hammet.driver.*" />
+          <option name="PATTERN" value="dev.hammet.daotests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
+      <option name="METHOD_NAME" value="create_employee_test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmployeeDAOTests.delete_employee_by_id_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ERS_Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.hammet.daotests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
+      <option name="METHOD_NAME" value="delete_employee_by_id_test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmployeeDAOTests.get_employee_by_id_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ERS_Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.hammet.daotests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
+      <option name="METHOD_NAME" value="get_employee_by_id_test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmployeeDAOTests.update_employee_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ERS_Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.hammet.daotests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
+      <option name="METHOD_NAME" value="update_employee_test" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.dev.hammet.driver.Driver" />
-        <item itemvalue="Application.Driver" />
+        <item itemvalue="JUnit.EmployeeDAOTests.delete_employee_by_id_test" />
+        <item itemvalue="JUnit.EmployeeDAOTests.update_employee_test" />
+        <item itemvalue="JUnit.EmployeeDAOTests.get_employee_by_id_test" />
+        <item itemvalue="JUnit.EmployeeDAOTests" />
+        <item itemvalue="JUnit.EmployeeDAOTests.create_employee_test" />
       </list>
     </recent_temporary>
   </component>
