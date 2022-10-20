@@ -5,6 +5,8 @@ import dev.hammet.driver.Driver;
 import dev.hammet.entities.Employee;
 import io.javalin.http.Handler;
 
+import java.util.List;
+
 public class EmployeeController {
 
     public Handler createEmployeeHandler = (ctx) ->{
@@ -17,6 +19,13 @@ public class EmployeeController {
         ctx.result(employeeJson);
     };
 
+    public Handler getAllEmployees = (ctx) ->{
+        List<Employee> employeeList = Driver.employeeService.getAllEmployees();
+        Gson gson = new Gson();
+        String json = gson.toJson(employeeList);
+        ctx.result(json);
+    };
+
     public Handler getEmployeeByIdHandler = (ctx) ->{
         int id = Integer.parseInt(ctx.pathParam("id"));//This will take what value was in the {id} and turn it into an int for us to use
         Employee employee = Driver.employeeService.getEmployeeById(id);
@@ -26,9 +35,9 @@ public class EmployeeController {
     };
 
     public Handler updateEmployeeHandler = (ctx) ->{
-        String bookJSON = ctx.body();
+        String employeeJSON = ctx.body();
         Gson gson = new Gson();
-        Employee employee = gson.fromJson(bookJSON, Employee.class);
+        Employee employee = gson.fromJson(employeeJSON, Employee.class);
         Employee updatedEmployee = Driver.employeeService.updateEmployee(employee);
         String json = gson.toJson(updatedEmployee);
         ctx.result(json);

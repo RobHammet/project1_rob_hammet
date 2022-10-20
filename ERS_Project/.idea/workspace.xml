@@ -4,16 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="committing from intellij">
+    <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="passing all postgresDAO tests: getAll, delete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/driver/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/driver/Driver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/util/ConnectionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/util/ConnectionFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/dev/hammet/daotests/EmployeeDAOTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/dev/hammet/daotests/EmployeeDAOTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOLocal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOLocal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOPostgres.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOPostgres.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/dev/hammet/daotests/EmployeeDAOTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/dev/hammet/daotests/EmployeeDAOTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,18 +57,32 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.EmployeeDAOTests.delete_employee_by_id_test">
-    <configuration name="EmployeeDAOTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Driver">
+    <configuration name="Driver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.driver.Driver" />
       <module name="ERS_Project" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="dev.hammet.daotests.*" />
+          <option name="PATTERN" value="dev.hammet.driver.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
-      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
-      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConnectionTests.connection_available" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ERS_Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.hammet.smoketests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.hammet.smoketests" />
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.smoketests.ConnectionTests" />
+      <option name="METHOD_NAME" value="connection_available" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -106,22 +119,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmployeeDAOTests.get_employee_by_id_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ERS_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="dev.hammet.daotests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
-      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
-      <option name="METHOD_NAME" value="get_employee_by_id_test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="EmployeeDAOTests.update_employee_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ERS_Project" />
       <extension name="coverage">
@@ -140,11 +137,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Driver" />
+        <item itemvalue="JUnit.ConnectionTests.connection_available" />
         <item itemvalue="JUnit.EmployeeDAOTests.delete_employee_by_id_test" />
         <item itemvalue="JUnit.EmployeeDAOTests.update_employee_test" />
         <item itemvalue="JUnit.EmployeeDAOTests.get_all_employees_test" />
-        <item itemvalue="JUnit.EmployeeDAOTests.get_employee_by_id_test" />
-        <item itemvalue="JUnit.EmployeeDAOTests" />
       </list>
     </recent_temporary>
   </component>
@@ -178,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666218641332</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="passing all postgresDAO tests: getAll, delete">
+      <created>1666221510662</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666221510662</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -195,6 +199,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="trying commit from inside intellij" />
     <MESSAGE value="committing from intellij" />
-    <option name="LAST_COMMIT_MESSAGE" value="committing from intellij" />
+    <MESSAGE value="passing all postgresDAO tests: getAll, delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="passing all postgresDAO tests: getAll, delete" />
   </component>
 </project>

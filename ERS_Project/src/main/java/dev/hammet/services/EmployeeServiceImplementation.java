@@ -3,6 +3,8 @@ package dev.hammet.services;
 import dev.hammet.entities.Employee;
 import dev.hammet.repositories.EmployeeDAO;
 
+import java.util.List;
+
 
 public class EmployeeServiceImplementation implements EmployeeService {
 
@@ -36,6 +38,11 @@ public class EmployeeServiceImplementation implements EmployeeService {
 //            e.printStackTrace();
 //            return null;
 //        }
+    }
+
+    @Override
+    public List<Employee> getAllEmployees() {
+        return this.employeeDAO.getAllEmployees();
     }
 
     @Override
