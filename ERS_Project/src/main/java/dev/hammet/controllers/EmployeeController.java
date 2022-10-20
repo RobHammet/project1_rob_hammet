@@ -4,10 +4,62 @@ import com.google.gson.Gson;
 import dev.hammet.driver.Driver;
 import dev.hammet.entities.Employee;
 import io.javalin.http.Handler;
+import org.eclipse.jetty.server.Authentication;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
+
+class UserAndPassword {
+    String username;
+    String password;
+}
 public class EmployeeController {
+
+    public Handler loginHandler = (ctx) ->{
+        String json = ctx.body();
+        Gson gson = new Gson();
+        UserAndPassword userAndPassword = gson.fromJson(json, UserAndPassword.class);
+
+        int ret = Driver.employeeService.authenticateUser(userAndPassword.username, userAndPassword.password);
+
+        if(ret == 2){
+            ctx.result("Logged in successfully as " + Driver.loggedInEmployee.getUsername() + " " +
+                    (Driver.loggedInEmployee.isManager()? "with" : "without") + " manager privileges");
+
+            ctx.status(Driver.loggedInEmployee.isManager()? 201 : 200);
+        } else if (ret == 1) {
+            ctx.status(400);
+            ctx.result("Login unsuccessful: password mismatch" );
+        }
+        else{
+            ctx.status(400);
+            ctx.result("Login unsuccessful: user not found" );
+        }
+
+//        String username = ctx.pathParam("username").toString();
+//        String password = ctx.pathParam("password").toString();
+//        System.out.println("attempting login with username: " + username + " and password: " + password);
+//        boolean success = false;
+//        List<Employee> employeeList = Driver.employeeService.getAllEmployees();
+//        for (Employee e : employeeList) {
+//            System.out.println(e.toString());
+//            if (e.getUsername().trim().equals(username.trim()) && e.getPassword().trim().equals(password.trim())) {
+//                System.out.println("success!!");
+//                Driver.loggedInEmployee = e;
+//                success = true;
+//
+//            }
+//        }
+//        if(success){
+//            ctx.result("Logged in successfully as " + Driver.loggedInEmployee.getUsername());
+//            ctx.status(201);
+//        }
+//        else{
+//            ctx.status(400);
+//            ctx.result("Login unsuccessful");
+//        }
+    };
 
     public Handler createEmployeeHandler = (ctx) ->{
         String json = ctx.body();

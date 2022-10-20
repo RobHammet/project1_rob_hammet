@@ -1,5 +1,6 @@
 package dev.hammet.services;
 
+import dev.hammet.driver.Driver;
 import dev.hammet.entities.Employee;
 import dev.hammet.repositories.EmployeeDAO;
 
@@ -13,6 +14,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
     public EmployeeServiceImplementation(EmployeeDAO employeeDAO){
         this.employeeDAO = employeeDAO;
     }
+
 
 
     @Override
@@ -59,5 +61,26 @@ public class EmployeeServiceImplementation implements EmployeeService {
     @Override
     public boolean deleteEmployeeById(int id) {
         return this.employeeDAO.deleteEmployeeById(id);
+    }
+
+    @Override
+    public int authenticateUser(String username, String password) {
+        int ret = 0;
+        List<Employee> employeeList = Driver.employeeService.getAllEmployees();
+        for (Employee e : employeeList) {
+            // System.out.println(e.toString());
+            if (e.getUsername().trim().equals(username.trim())) {
+                ret = 1;
+                if (e.getPassword().trim().equals(password.trim())) {
+                    System.out.println("success!!");
+                    Driver.loggedInEmployee = e;
+                    ret = 2;
+                    break;
+                }
+            }
+
+        }
+
+        return ret;
     }
 }

@@ -17,4 +17,6 @@ public interface EmployeeService {
     //DELETE
     boolean deleteEmployeeById(int id);
 
+    int authenticateUser(String username, String password);
+
 }
