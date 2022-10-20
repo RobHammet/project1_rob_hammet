@@ -29,7 +29,7 @@ public class ReimbursementRequestController {
     };
 
     public Handler getReimbursementRequestByIdHandler = (ctx) ->{
-        int id = Integer.parseInt(ctx.pathParam("r_id"));//This will take what value was in the {id} and turn it into an int for us to use
+        int id = Integer.parseInt(ctx.pathParam("id"));//This will take what value was in the {id} and turn it into an int for us to use
         ReimbursementRequest reimbursementRequest = Driver.reimbursementRequestService.getReimbursementRequestById(id);
         Gson gson = new Gson();
         String json = gson.toJson(reimbursementRequest);
@@ -46,7 +46,7 @@ public class ReimbursementRequestController {
     };
 
     public Handler deleteReimbursementRequestHandler = (ctx) ->{
-        int id = Integer.parseInt(ctx.pathParam("r_id"));
+        int id = Integer.parseInt(ctx.pathParam("id"));
         boolean result = Driver.reimbursementRequestService.deleteReimbursementRequestById(id);
         if(result){
             ctx.status(204);

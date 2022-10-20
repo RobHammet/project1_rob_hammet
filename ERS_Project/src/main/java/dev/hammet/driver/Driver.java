@@ -21,18 +21,18 @@ public class Driver {
         Javalin app = Javalin.create();
 
         EmployeeController employeeController = new EmployeeController();
-        app.post("/employees", employeeController.createEmployeeHandler);
-        app.get("/employees/{id}", employeeController.getEmployeeByIdHandler);
-        app.get("/employees", employeeController.getAllEmployees);
-        app.put("/employees", employeeController.updateEmployeeHandler);
-        app.delete("/employees/{id}", employeeController.deleteEmployeeHandler);
+        app.post("/new_employee", employeeController.createEmployeeHandler);
+        app.get("/get_employee/{id}", employeeController.getEmployeeByIdHandler);
+        app.get("/get_all_employees", employeeController.getAllEmployees);
+        app.put("/update_employee", employeeController.updateEmployeeHandler);
+        app.delete("/delete_employee/{id}", employeeController.deleteEmployeeHandler);
 
         ReimbursementRequestController reimbursementRequestController = new ReimbursementRequestController();
-        app.post("/reimbursement_requests", reimbursementRequestController.createReimbursementRequestHandler);
-        app.get("/reimbursement_requests/{r_id}", reimbursementRequestController.getReimbursementRequestByIdHandler);
-        app.get("/reimbursement_requests", reimbursementRequestController.getAllReimbursementRequests);
-        app.put("/reimbursement_requests", reimbursementRequestController.updateReimbursementRequestHandler);
-        app.delete("/reimbursement_requests/{r_id}", reimbursementRequestController.deleteReimbursementRequestHandler);
+        app.post("/new_reimbursement_request", reimbursementRequestController.createReimbursementRequestHandler);
+        app.get("/get_reimbursement_request/{id}", reimbursementRequestController.getReimbursementRequestByIdHandler);
+        app.get("/get_all_reimbursement_requests", reimbursementRequestController.getAllReimbursementRequests);
+        app.put("/update_reimbursement_request", reimbursementRequestController.updateReimbursementRequestHandler);
+        app.delete("/delete_reimbursement_request/{id}", reimbursementRequestController.deleteReimbursementRequestHandler);
 
 
 
