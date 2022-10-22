@@ -5,17 +5,41 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
+    public static Connection getConnection() {
+        //jdbc:postgresql://localhost:5432/postgres?user=postgres&password=password&currentSchema=ers_schema
+      //  String url = "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=password&currentSchema=ers_schema";
+                //"jdbc:postgresql://postgre_container:5432/postgres?currentSchema=ers_schema" ;
+                //POSTGRES_SQL_DB=jdbc:postgresql://postgre_container:5432/postgres?currentSchema=ers_schema -e DB_USERNAME=postgres -e PASSWORD=password
+                // "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=password&currentSchema=ers_schema";
 
-    public static Connection getConnection()  {
+
+         String url = System.getenv("POSTGRES_SQL_DB");
+      //  String url = "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=password&currentSchema=ers_schema";
+
+
+        String username = System.getenv("DB_USERNAME");
+        String password = System.getenv("PASSWORD");
         try {
-            Connection connection = DriverManager.getConnection(System.getenv("POSTGRES_SQL_DB"));
-            return connection;
+            return DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException(e);
         }
     }
+
 }
+
+
+
+//    public static Connection getConnection()  {
+//        try {
+//            Connection connection = DriverManager.getConnection(System.getenv("POSTGRES_SQL_DB"));
+//            return connection;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+
 
 
 

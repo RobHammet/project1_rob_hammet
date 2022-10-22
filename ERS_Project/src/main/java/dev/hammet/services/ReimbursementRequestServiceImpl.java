@@ -48,6 +48,11 @@ public class ReimbursementRequestServiceImpl implements ReimbursementRequestServ
     }
 
     @Override
+    public List<ReimbursementRequest> getReimbursementRequestsForEmployee(int id) {
+        return this.reimbursementRequestDAO.getReimbursementRequestsForEmployee(id);
+    }
+
+    @Override
     public ReimbursementRequest updateReimbursementRequest(ReimbursementRequest reimbursementRequest) {
         if(reimbursementRequest.getDescription().length() == 0){
             throw new RuntimeException("Description cannot be empty.");
@@ -61,5 +66,10 @@ public class ReimbursementRequestServiceImpl implements ReimbursementRequestServ
     @Override
     public boolean deleteReimbursementRequestById(int id) {
         return this.reimbursementRequestDAO.deleteReimbursementRequestById(id);
+    }
+
+    @Override
+    public boolean changeReimbursementRequestStatus(int id, ReimbursementRequest.Status status) {
+        return this.reimbursementRequestDAO.changeReimbursementRequestStatus(id, status);
     }
 }

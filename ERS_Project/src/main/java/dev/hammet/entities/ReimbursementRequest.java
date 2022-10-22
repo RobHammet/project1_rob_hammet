@@ -16,7 +16,7 @@ public class ReimbursementRequest {
     private int employeeId;
 
     public ReimbursementRequest() {
-
+        this.status = Status.PENDING;
     }
 
     public ReimbursementRequest(int id, int employeeId, float amount, String description) {

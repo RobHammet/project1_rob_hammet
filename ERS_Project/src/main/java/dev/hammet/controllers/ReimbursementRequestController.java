@@ -8,6 +8,11 @@ import io.javalin.http.Handler;
 
 import java.util.List;
 
+
+class AmountAndDescription {
+    float amount;
+    String description;
+}
 public class ReimbursementRequestController {
 
     public Handler createReimbursementRequestHandler = (ctx) ->{
@@ -20,9 +25,40 @@ public class ReimbursementRequestController {
         ctx.result(reimbursementRequestJson);
     };
 
+    public Handler makeNewReimbursementRequestHandler = (ctx) ->{
+        String json = ctx.body();
+        Gson gson = new Gson();
+        AmountAndDescription amountAndDescription = gson.fromJson(json, AmountAndDescription.class);
 
-    public Handler getAllReimbursementRequests = (ctx) ->{
+        ReimbursementRequest reimbursementRequest = new ReimbursementRequest();
+        reimbursementRequest.setEmployeeId(Driver.loggedInEmployee.getId());
+        reimbursementRequest.setAmount(amountAndDescription.amount);
+        reimbursementRequest.setDescription(amountAndDescription.description);
+
+        ReimbursementRequest registeredReimbursementRequest = Driver.reimbursementRequestService.createReimbursementRequest(reimbursementRequest);
+        String reimbursementRequestJson = gson.toJson(registeredReimbursementRequest);
+        ctx.status(201);
+        ctx.result(reimbursementRequestJson);
+    };
+
+    public Handler getAllReimbursementRequestsHandler = (ctx) ->{
         List<ReimbursementRequest> reimbursementRequestList = Driver.reimbursementRequestService.getAllReimbursementRequests();
+        Gson gson = new Gson();
+        String json = gson.toJson(reimbursementRequestList);
+        ctx.result(json);
+    };
+
+    public Handler getPendingReimbursementRequestsHandler = (ctx) ->{
+        List<ReimbursementRequest> reimbursementRequestList = Driver.reimbursementRequestService.getAllReimbursementRequests();
+        reimbursementRequestList.removeIf(obj -> obj.getStatus() != ReimbursementRequest.Status.PENDING);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(reimbursementRequestList);
+        ctx.result(json);
+    };
+    public Handler getReimbursementRequestsForEmployeeHandler = (ctx) ->{
+        int id = Integer.parseInt(ctx.pathParam("id"));
+        List<ReimbursementRequest> reimbursementRequestList = Driver.reimbursementRequestService.getReimbursementRequestsForEmployee(id);
         Gson gson = new Gson();
         String json = gson.toJson(reimbursementRequestList);
         ctx.result(json);
@@ -45,6 +81,8 @@ public class ReimbursementRequestController {
         ctx.result(json);
     };
 
+
+
     public Handler deleteReimbursementRequestHandler = (ctx) ->{
         int id = Integer.parseInt(ctx.pathParam("id"));
         boolean result = Driver.reimbursementRequestService.deleteReimbursementRequestById(id);
@@ -55,6 +93,43 @@ public class ReimbursementRequestController {
             ctx.status(400);
             ctx.result("Could not process your delete request");
         }
+    };
+
+
+
+    public Handler changeReimbursementRequestStatusHandler = (ctx) ->{
+        int id = Integer.parseInt(ctx.pathParam("id"));
+        int statusInt = Integer.parseInt(ctx.pathParam("st"));
+       // int statusInt = 0;
+        ReimbursementRequest.Status status = null;
+        if (statusInt == 0) {
+            status = ReimbursementRequest.Status.PENDING;
+        } else if (statusInt == 1) {
+            status = ReimbursementRequest.Status.APPROVED;
+        } else if (statusInt == 2) {
+            status = ReimbursementRequest.Status.DENIED;
+        } else {
+            status = null;
+        }
+        System.out.println("changeReimbursementRequestStatusHandler running");
+        //ReimbursementRequest.Status status = ReimbursementRequest.Status.valueOf(ctx.pathParam("status"));
+        boolean result = false;
+        try {
+            result = Driver.reimbursementRequestService.changeReimbursementRequestStatus(id, status);
+        } catch (RuntimeException e) {
+            result = false;
+        }
+
+        if(result){
+            ctx.status(204);
+            ctx.result("Request status changed to: " + status.name());
+            ctx.redirect("/manager/get_pending_reimbursement_requests/");
+        }
+        else{
+            ctx.status(400);
+            ctx.result("Could not change request status");
+        }
+
     };
 
 

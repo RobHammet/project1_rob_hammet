@@ -23,24 +23,40 @@ public class Driver {
         Javalin app = Javalin.create();
 
         EmployeeController employeeController = new EmployeeController();
-
-        //app.post("/login/{username}/{password}", employeeController.loginHandler);
-        app.post("/login/", employeeController.loginHandler);
-
-        app.post("/new_employee", employeeController.createEmployeeHandler);
-        app.get("/get_employee/{id}", employeeController.getEmployeeByIdHandler);
-        app.get("/get_all_employees", employeeController.getAllEmployees);
-        app.put("/update_employee", employeeController.updateEmployeeHandler);
-        app.delete("/delete_employee/{id}", employeeController.deleteEmployeeHandler);
-
         ReimbursementRequestController reimbursementRequestController = new ReimbursementRequestController();
-        app.post("/new_reimbursement_request", reimbursementRequestController.createReimbursementRequestHandler);
+
+        // any user can use without login
+        // --- employee-related:
+        app.post("/register", employeeController.registerNewUserHandler);
+        app.post("/login", employeeController.loginHandler);
+        app.get("/logout", employeeController.logoutHandler);
+
+
+
+        // any registered employee can user after login (own information and own requests)
+        // --- employee-related:
+        app.get("/get_employee/{id}", employeeController.getEmployeeByIdHandler);
+        app.put("/update_employee", employeeController.updateEmployeeHandler);
+        // --- request-related:
+        app.post("/make_new_reimbursement_request", reimbursementRequestController.makeNewReimbursementRequestHandler);
+//        app.post("/new_reimbursement_request", reimbursementRequestController.createReimbursementRequestHandler);
+//        app.get("/get_reimbursement_requests_for/{id}", reimbursementRequestController.getReimbursementRequestsForEmployeeHandler);
+
+
+        // only logged in managers can use (other employees' requests)
+        app.before("/manager/*", employeeController.checkManagerHandler);
+        // --- employee-related:
+        app.get("/manager/get_all_employees", employeeController.getAllEmployees);
+     //   app.delete("/delete_employee/{id}", employeeController.deleteEmployeeHandler);
+        // --- request-related:
         app.get("/get_reimbursement_request/{id}", reimbursementRequestController.getReimbursementRequestByIdHandler);
-        app.get("/get_all_reimbursement_requests", reimbursementRequestController.getAllReimbursementRequests);
+        app.get("/get_reimbursement_requests_for/{id}", reimbursementRequestController.getReimbursementRequestsForEmployeeHandler);
+        app.get("/manager/get_all_reimbursement_requests", reimbursementRequestController.getAllReimbursementRequestsHandler);
+        app.get("/manager/get_pending_reimbursement_requests", reimbursementRequestController.getPendingReimbursementRequestsHandler);
         app.put("/update_reimbursement_request", reimbursementRequestController.updateReimbursementRequestHandler);
         app.delete("/delete_reimbursement_request/{id}", reimbursementRequestController.deleteReimbursementRequestHandler);
 
-
+        app.put("/manager/change_reimbursement_request_status/{id}-{st}", reimbursementRequestController.changeReimbursementRequestStatusHandler);
 
 
         app.start();

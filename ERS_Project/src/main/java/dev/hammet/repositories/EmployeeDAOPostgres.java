@@ -16,6 +16,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             // Here is the unfun thing about JDBC, you have to write SQL statements in Java
             // I recommend putting in comments the SQL command you are trying to execute
             //INSERT INTO books VALUES (DEFAULT, 'Great Gatsby', 'F. Scott Fitts Jerald', 0);
+            System.out.println("ATTEMPTING TO INSERT NEW EMPLOYEE...");
             String sql = "insert into employees values(default, ?, ? , ?)";
             // The only thing in the sql String that isnt "just a string" are the question marks
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

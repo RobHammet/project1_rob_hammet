@@ -93,6 +93,37 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
     }
 
     @Override
+    public List<ReimbursementRequest> getReimbursementRequestsForEmployee(int id) {
+
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String sql = "select * from reimbursement_requests where e_id=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            List<ReimbursementRequest> reimbursementRequestList = new ArrayList<>();
+
+            while (rs.next()) {
+
+                ReimbursementRequest reimbursementRequest = new ReimbursementRequest();
+                reimbursementRequest.setId(rs.getInt("r_id"));
+                reimbursementRequest.setDescription(rs.getString("r_description"));
+                reimbursementRequest.setAmount(rs.getFloat("r_amount"));
+                reimbursementRequest.setStatus(ReimbursementRequest.Status.valueOf(rs.getString("r_status")));                reimbursementRequest.setEmployeeId(rs.getInt("e_id"));
+
+                reimbursementRequestList.add(reimbursementRequest);
+            }
+
+            return reimbursementRequestList;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public ReimbursementRequest updateReimbursementRequest(ReimbursementRequest reimbursementRequest) {
 
         try(Connection connection = ConnectionFactory.getConnection()){
@@ -137,6 +168,33 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
             e.printStackTrace();
             return false;
         }
+
+    }
+
+    @Override
+    public boolean changeReimbursementRequestStatus(int id, ReimbursementRequest.Status status) {
+
+
+        try(Connection connection = ConnectionFactory.getConnection()){
+            //UPDATE books SET title = 'It Ends with Us', author = 'Colleen Hoover' WHERE id = 2;
+            String sql = "update reimbursement_requests set r_status=? where r_id=" + id;
+            System.out.println("ATTEMPTING TO CHANGE STATUS");
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, status.name());
+
+            preparedStatement.executeUpdate();
+
+//            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+//            resultSet.next();
+//            int generatedKey = resultSet.getInt("id");
+//            employee.setId(generatedKey);
+            return true;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
 
     }
 }

@@ -9,13 +9,10 @@ import java.util.List;
 
 public class EmployeeServiceImplementation implements EmployeeService {
 
-
     private EmployeeDAO employeeDAO;
     public EmployeeServiceImplementation(EmployeeDAO employeeDAO){
         this.employeeDAO = employeeDAO;
     }
-
-
 
     @Override
     public Employee createEmployee(Employee employee) {
@@ -27,19 +24,12 @@ public class EmployeeServiceImplementation implements EmployeeService {
         }
         Employee savedEmployee = this.employeeDAO.createEmployee(employee);
 
-        System.out.println(savedEmployee.toString());
-
         return savedEmployee;
     }
 
     @Override
     public Employee getEmployeeById(int id) {
-       // try{
-            return this.employeeDAO.getEmployeeById(id);
-//        } catch(SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
+        return this.employeeDAO.getEmployeeById(id);
     }
 
     @Override
@@ -68,19 +58,35 @@ public class EmployeeServiceImplementation implements EmployeeService {
         int ret = 0;
         List<Employee> employeeList = Driver.employeeService.getAllEmployees();
         for (Employee e : employeeList) {
-            // System.out.println(e.toString());
             if (e.getUsername().trim().equals(username.trim())) {
-                ret = 1;
                 if (e.getPassword().trim().equals(password.trim())) {
-                    System.out.println("success!!");
                     Driver.loggedInEmployee = e;
                     ret = 2;
                     break;
+                } else {
+                    ret = 1;
+                    break;
                 }
             }
-
         }
-
         return ret;
     }
+
+    @Override
+    public Employee registerNewUser(String username, String password) {
+        Employee ret = new Employee(0, username, password, false);
+        List<Employee> employeeList = Driver.employeeService.getAllEmployees();
+        for (Employee e : employeeList) {
+            if (e.getUsername().trim().equals(username.trim())) {
+                ret = null;
+                break;
+            }
+        }
+        return ret;
+    }
+
+
+
+
+
 }

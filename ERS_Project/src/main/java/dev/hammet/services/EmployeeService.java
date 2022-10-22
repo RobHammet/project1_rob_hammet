@@ -19,4 +19,6 @@ public interface EmployeeService {
 
     int authenticateUser(String username, String password);
 
+    Employee registerNewUser(String username, String password);
+
 }
