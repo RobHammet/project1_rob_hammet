@@ -49,16 +49,17 @@ public class Driver {
 
         // only logged in managers can use (other employees' requests)
         app.before("/manager/*", employeeController.checkManagerHandler);
+
         // --- employee-related:
         app.get("/manager/get_all_employees", employeeController.getAllEmployees);
      //   app.delete("/delete_employee/{id}", employeeController.deleteEmployeeHandler);
         // --- request-related:
-        app.get("/get_reimbursement_request/{id}", reimbursementRequestController.getReimbursementRequestByIdHandler);
-        app.get("/get_reimbursement_requests_for/{id}", reimbursementRequestController.getReimbursementRequestsForEmployeeHandler);
+   //     app.get("/get_reimbursement_request/{id}", reimbursementRequestController.getReimbursementRequestByIdHandler);
+        app.get("/manager/get_reimbursement_requests_for/{id}", reimbursementRequestController.getReimbursementRequestsForEmployeeHandler);
         app.get("/manager/get_all_reimbursement_requests", reimbursementRequestController.getAllReimbursementRequestsHandler);
         app.get("/manager/get_pending_reimbursement_requests", reimbursementRequestController.getPendingReimbursementRequestsHandler);
-        app.put("/update_reimbursement_request", reimbursementRequestController.updateReimbursementRequestHandler);
-        app.delete("/delete_reimbursement_request/{id}", reimbursementRequestController.deleteReimbursementRequestHandler);
+   //     app.put("/update_reimbursement_request", reimbursementRequestController.updateReimbursementRequestHandler);
+   //     app.delete("/delete_reimbursement_request/{id}", reimbursementRequestController.deleteReimbursementRequestHandler);
 
         app.put("/manager/change_reimbursement_request_status/{id}-{st}", reimbursementRequestController.changeReimbursementRequestStatusHandler);
 
