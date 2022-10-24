@@ -176,19 +176,20 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
 
 
         try(Connection connection = ConnectionFactory.getConnection()){
-            //UPDATE books SET title = 'It Ends with Us', author = 'Colleen Hoover' WHERE id = 2;
             String sql = "update reimbursement_requests set r_status=? where r_id=" + id;
-            System.out.println("ATTEMPTING TO CHANGE STATUS");
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
+            // cannot change status of request to anything except "approved" and denied"
+            // and cannot change a ticket unless its status is "pending"
+            if ((status != ReimbursementRequest.Status.APPROVED &&
+                status != ReimbursementRequest.Status.DENIED) ||
+                    (getReimbursementRequestById(id).getStatus() != ReimbursementRequest.Status.PENDING)) {
+                throw new SQLException();
+            }
+            // if the status change is ok, update the request's status
             preparedStatement.setString(1, status.name());
-
             preparedStatement.executeUpdate();
 
-//            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-//            resultSet.next();
-//            int generatedKey = resultSet.getInt("id");
-//            employee.setId(generatedKey);
             return true;
         }
         catch (SQLException e){

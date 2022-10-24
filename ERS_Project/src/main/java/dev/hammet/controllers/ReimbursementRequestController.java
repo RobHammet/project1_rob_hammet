@@ -35,10 +35,17 @@ public class ReimbursementRequestController {
         reimbursementRequest.setAmount(amountAndDescription.amount);
         reimbursementRequest.setDescription(amountAndDescription.description);
 
-        ReimbursementRequest registeredReimbursementRequest = Driver.reimbursementRequestService.createReimbursementRequest(reimbursementRequest);
-        String reimbursementRequestJson = gson.toJson(registeredReimbursementRequest);
-        ctx.status(201);
-        ctx.result(reimbursementRequestJson);
+        try {
+            ReimbursementRequest registeredReimbursementRequest = Driver.reimbursementRequestService.createReimbursementRequest(reimbursementRequest);
+            String reimbursementRequestJson = gson.toJson(registeredReimbursementRequest);
+            ctx.status(201);
+            ctx.result(reimbursementRequestJson);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            ctx.status(400);
+            ctx.result(e.getMessage());
+        }
+
     };
 
     public Handler getAllReimbursementRequestsHandler = (ctx) ->{
@@ -58,6 +65,15 @@ public class ReimbursementRequestController {
     };
     public Handler getReimbursementRequestsForEmployeeHandler = (ctx) ->{
         int id = Integer.parseInt(ctx.pathParam("id"));
+        List<ReimbursementRequest> reimbursementRequestList = Driver.reimbursementRequestService.getReimbursementRequestsForEmployee(id);
+        Gson gson = new Gson();
+        String json = gson.toJson(reimbursementRequestList);
+        ctx.result(json);
+    };
+
+    public Handler showUsersOwnRequestsHandler = (ctx) ->{
+        System.out.println("ATTEMPTING TO OPEN USER'S OWN REQUESTS");
+        int id = Driver.loggedInEmployee.getId();
         List<ReimbursementRequest> reimbursementRequestList = Driver.reimbursementRequestService.getReimbursementRequestsForEmployee(id);
         Gson gson = new Gson();
         String json = gson.toJson(reimbursementRequestList);
@@ -100,7 +116,6 @@ public class ReimbursementRequestController {
     public Handler changeReimbursementRequestStatusHandler = (ctx) ->{
         int id = Integer.parseInt(ctx.pathParam("id"));
         int statusInt = Integer.parseInt(ctx.pathParam("st"));
-       // int statusInt = 0;
         ReimbursementRequest.Status status = null;
         if (statusInt == 0) {
             status = ReimbursementRequest.Status.PENDING;
@@ -111,8 +126,7 @@ public class ReimbursementRequestController {
         } else {
             status = null;
         }
-        System.out.println("changeReimbursementRequestStatusHandler running");
-        //ReimbursementRequest.Status status = ReimbursementRequest.Status.valueOf(ctx.pathParam("status"));
+
         boolean result = false;
         try {
             result = Driver.reimbursementRequestService.changeReimbursementRequestStatus(id, status);

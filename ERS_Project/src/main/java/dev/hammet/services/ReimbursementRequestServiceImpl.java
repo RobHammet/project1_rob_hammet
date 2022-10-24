@@ -1,5 +1,6 @@
 package dev.hammet.services;
 
+import dev.hammet.driver.Driver;
 import dev.hammet.entities.Employee;
 import dev.hammet.entities.ReimbursementRequest;
 import dev.hammet.repositories.EmployeeDAO;
@@ -21,8 +22,10 @@ public class ReimbursementRequestServiceImpl implements ReimbursementRequestServ
         if(reimbursementRequest.getDescription().length() == 0){
             throw new RuntimeException("Description cannot be empty.");
         }
-        if(reimbursementRequest.getAmount() > 1000000){
-            throw new RuntimeException("Amount cannot be in excess of one million dollars.");
+
+        if (reimbursementRequest.getAmount() > 50000 ||
+            reimbursementRequest.getAmount() <= 0){
+            throw new RuntimeException("Amount cannot be zero or in excess of 50000 dollars.");
         }
         try {
             ReimbursementRequest savedReimbursementRequest = this.reimbursementRequestDAO.createReimbursementRequest(reimbursementRequest);

@@ -64,6 +64,34 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
         }
     }
 
+
+
+    @Override
+    public Employee getEmployeeByUsername(String username) {
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String sql = "select * from employees where username = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            // The class PreparedStatement has a method called prepareStatement (no d) that takes in a string
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+
+            Employee employee = new Employee();
+            employee.setId(rs.getInt("id"));
+            employee.setUsername(rs.getString("username"));
+            employee.setPassword(rs.getString("password"));
+            employee.setManager(rs.getBoolean("isManager"));
+
+            return employee;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
     @Override
     public List<Employee> getAllEmployees() {
         try (Connection connection = ConnectionFactory.getConnection()) {

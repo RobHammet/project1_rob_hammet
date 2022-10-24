@@ -55,6 +55,16 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
     @Override
     public int authenticateUser(String username, String password) {
+//        System.out.println("NEW AUTHENTICATE RUNNING...");
+//        Employee attemptedLoginEmployee = getEmployeeByUsername(username);
+//        if (attemptedLoginEmployee == null) {
+//            System.out.println("EMPLOYEE WITH THAT USERNAME NOT FOUND");
+//            return 0;
+//        } else {
+//            Driver.loggedInEmployee = attemptedLoginEmployee;
+//            return 2;
+//        }
+
         int ret = 0;
         List<Employee> employeeList = Driver.employeeService.getAllEmployees();
         for (Employee e : employeeList) {
@@ -70,6 +80,11 @@ public class EmployeeServiceImplementation implements EmployeeService {
             }
         }
         return ret;
+    }
+
+    @Override
+    public Employee getEmployeeByUsername(String username) {
+        return this.employeeDAO.getEmployeeByUsername(username);
     }
 
     @Override

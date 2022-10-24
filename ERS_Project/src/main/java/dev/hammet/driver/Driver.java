@@ -29,14 +29,17 @@ public class Driver {
         // --- employee-related:
         app.post("/register", employeeController.registerNewUserHandler);
         app.post("/login", employeeController.loginHandler);
-        app.get("/logout", employeeController.logoutHandler);
-
-
 
         // any registered employee can user after login (own information and own requests)
         // --- employee-related:
-        app.get("/get_employee/{id}", employeeController.getEmployeeByIdHandler);
-        app.put("/update_employee", employeeController.updateEmployeeHandler);
+        app.get("/logout", employeeController.logoutHandler);
+        app.get("/profile", employeeController.loadProfileHandler);
+        app.put("/update-profile", employeeController.updateProfileHandler);
+        app.get("/my-requests", reimbursementRequestController.showUsersOwnRequestsHandler);
+
+//        app.get("/get_employee/{id}", employeeController.getEmployeeByIdHandler);
+//        app.put("/update_employee", employeeController.updateEmployeeHandler);
+
         // --- request-related:
         app.post("/make_new_reimbursement_request", reimbursementRequestController.makeNewReimbursementRequestHandler);
 //        app.post("/new_reimbursement_request", reimbursementRequestController.createReimbursementRequestHandler);

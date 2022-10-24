@@ -4,32 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="added login request and logic">
+    <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="added logout and some manager privileges">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/EmployeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/ReimbursementRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/ReimbursementRequestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/driver/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/driver/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/entities/ReimbursementRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/entities/ReimbursementRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAOPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAOPostgres.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/ReimbursementRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/ReimbursementRequestService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/ReimbursementRequestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/ReimbursementRequestServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/util/ConnectionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/util/ConnectionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ERS_Project-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/ERS_Project-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ERS_Project-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/ERS_Project-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/controllers/EmployeeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/controllers/EmployeeController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/controllers/ReimbursementRequestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/controllers/ReimbursementRequestController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/controllers/UserAndPassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/controllers/UserAndPassword.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/driver/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/driver/Driver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOLocal.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOLocal.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOPostgres.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/EmployeeDAOPostgres.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/ReimbursementRequestDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/ReimbursementRequestDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/ReimbursementRequestDAOPostgres.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/ReimbursementRequestDAOPostgres.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/services/EmployeeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/services/EmployeeService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/services/EmployeeServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/services/EmployeeServiceImplementation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/services/ReimbursementRequestService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/services/ReimbursementRequestService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/services/ReimbursementRequestServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/services/ReimbursementRequestServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/util/ConnectionFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/util/ConnectionFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +230,21 @@
       <option name="project" value="LOCAL" />
       <updated>1666297770999</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added logout and some manager privileges">
+      <created>1666417926335</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1666417926335</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added logout and some manager privileges">
+      <created>1666417950424</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1666417950424</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -251,6 +265,7 @@
     <MESSAGE value="made reimbursement request object/layers" />
     <MESSAGE value="changed paths for requests" />
     <MESSAGE value="added login request and logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="added login request and logic" />
+    <MESSAGE value="added logout and some manager privileges" />
+    <option name="LAST_COMMIT_MESSAGE" value="added logout and some manager privileges" />
   </component>
 </project>

@@ -13,7 +13,12 @@ import java.util.List;
 class UserAndPassword {
     String username;
     String password;
+    UserAndPassword(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
+
 public class EmployeeController {
 
 
@@ -49,8 +54,8 @@ public class EmployeeController {
             int ret = Driver.employeeService.authenticateUser(userAndPassword.username, userAndPassword.password);
 
             if(ret == 2){
-                ctx.result("Logged in successfully as " + Driver.loggedInEmployee.getUsername() + " " +
-                        (Driver.loggedInEmployee.isManager()? "with" : "without") + " manager privileges");
+                ctx.result("Logged in successfully as " + Driver.loggedInEmployee.getUsername() + " *" +
+                        (Driver.loggedInEmployee.isManager()? "with" : "without") + "* manager privileges");
 
                 ctx.status(Driver.loggedInEmployee.isManager()? 201 : 200);
             } else if (ret == 1) {
@@ -77,7 +82,7 @@ public class EmployeeController {
             System.gc();
             System.runFinalization();
 
-            ctx.result(username + " logged out successfully");
+            ctx.result(username + " logged out successfully!");
             ctx.status(200);
             System.out.println("LOGGED OUT");
         } else{
@@ -87,6 +92,44 @@ public class EmployeeController {
         }
 
     };
+    public Handler loadProfileHandler = (ctx) ->{
+
+        if (Driver.loggedInEmployee != null) {
+
+            Employee employee = Driver.employeeService.getEmployeeById(Driver.loggedInEmployee.getId());
+            UserAndPassword userAndPassword = new UserAndPassword(employee.getUsername(), employee.getPassword());
+            Gson gson = new Gson();
+            String json = gson.toJson(userAndPassword);
+            ctx.result(json);
+
+        }
+    };
+
+    public Handler updateProfileHandler = (ctx) ->{
+
+        String json = ctx.body();
+        Gson gson = new Gson();
+        UserAndPassword userAndPassword = gson.fromJson(json, UserAndPassword.class);
+
+        try {
+            // make a new employee object based on logged-in user, updating user & pwd
+            Employee modifiedEmployee = new Employee(Driver.loggedInEmployee.getId(),
+                                                    userAndPassword.username,
+                                                    userAndPassword.password,
+                                                    Driver.loggedInEmployee.isManager());
+            Employee updatedEmployee = Driver.employeeService.updateEmployee(modifiedEmployee);
+            Driver.loggedInEmployee = updatedEmployee;
+
+
+            ctx.status(201);
+            ctx.result("Successfully updated profile of: " + Driver.loggedInEmployee.getUsername() );
+
+        } catch (RuntimeException e) {
+            ctx.status(400);
+            ctx.result("Profile update unsuccessful: " + e.getMessage() );
+        }
+    };
+
     public Handler checkManagerHandler = (ctx) ->{
         if (!Driver.loggedInEmployee.isManager()) {
 

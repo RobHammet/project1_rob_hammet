@@ -26,6 +26,12 @@ public class EmployeeDAOLocal implements EmployeeDAO {
     }
 
     @Override
+    public Employee getEmployeeByUsername(String username) {
+        //this probably does nothing
+        return employeeTable.get(0);
+    }
+
+    @Override
     public List<Employee> getAllEmployees() {
         List<Employee> employeeList = new ArrayList<>();
         employeeTable.forEach((key, value) -> {
