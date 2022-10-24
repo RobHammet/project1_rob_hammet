@@ -3,10 +3,16 @@ package dev.hammet.controllers;
 import com.google.gson.Gson;
 import dev.hammet.driver.Driver;
 import dev.hammet.entities.Employee;
+import dev.hammet.util.ConnectionFactory;
 import io.javalin.http.Handler;
 import org.eclipse.jetty.server.Authentication;
 
 import javax.jws.soap.SOAPBinding;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -146,6 +152,7 @@ public class EmployeeController {
         ctx.status(201);
         ctx.result(employeeJson);
     };
+
 
     public Handler getAllEmployees = (ctx) ->{
         List<Employee> employeeList = Driver.employeeService.getAllEmployees();
