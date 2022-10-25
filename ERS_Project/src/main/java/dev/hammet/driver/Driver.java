@@ -49,7 +49,7 @@ public class Driver {
 
         // only logged in managers can use (other employees' requests)
         app.before("/manager/*", employeeController.checkManagerHandler);
-
+        app.get("/kick", employeeController.kickOutNonManagerHandler);
         // --- employee-related:
         app.get("/manager/get_all_employees", employeeController.getAllEmployees);
      //   app.delete("/delete_employee/{id}", employeeController.deleteEmployeeHandler);

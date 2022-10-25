@@ -98,6 +98,12 @@ public class EmployeeController {
         }
 
     };
+
+    public Handler kickOutNonManagerHandler = (ctx) ->{
+        ctx.result("Access denied: not a manager");
+        ctx.status(400);
+    };
+
     public Handler loadProfileHandler = (ctx) ->{
 
         if (Driver.loggedInEmployee != null) {
@@ -137,10 +143,21 @@ public class EmployeeController {
     };
 
     public Handler checkManagerHandler = (ctx) ->{
-        if (!Driver.loggedInEmployee.isManager()) {
 
-            throw new RuntimeException("Not a manager, throwing...");
-        }
+        if (!Driver.loggedInEmployee.isManager())
+            ctx.redirect("/kick");
+//        try {
+//            if (!Driver.loggedInEmployee.isManager()) {
+//
+//                throw new RuntimeException("Not a manager, throwing...");
+//            }
+//        } catch (RuntimeException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
+//            ctx.redirect("/kick");
+//        }
     };
 
     public Handler createEmployeeHandler = (ctx) ->{
