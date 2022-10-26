@@ -113,7 +113,6 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
     @Override
     public Employee updateEmployee(Employee employee) {
 
-
         try(Connection connection = ConnectionFactory.getConnection()){
             //UPDATE books SET title = 'It Ends with Us', author = 'Colleen Hoover' WHERE id = 2;
             String sql = "update employees set username=?, password=?, isManager=? where id=?";
@@ -135,6 +134,27 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
         return null;
     }
 
+    @Override
+    public Employee changeEmployeeRole(Employee employee, boolean toManager) {
+
+        try(Connection connection = ConnectionFactory.getConnection()){
+            //UPDATE books SET title = 'It Ends with Us', author = 'Colleen Hoover' WHERE id = 2;
+            String sql = "update employees set isManager=? where id=?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setBoolean(1, toManager);
+            preparedStatement.setInt(2,employee.getId());
+
+            preparedStatement.executeUpdate();
+
+            return employee;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
     @Override
     public boolean deleteEmployeeById(int id) {
 

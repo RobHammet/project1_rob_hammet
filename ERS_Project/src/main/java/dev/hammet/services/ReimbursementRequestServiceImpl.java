@@ -56,6 +56,11 @@ public class ReimbursementRequestServiceImpl implements ReimbursementRequestServ
     }
 
     @Override
+    public List<ReimbursementRequest> getReimbursementRequestsForEmployeeOfType(int id, ReimbursementRequest.Type type) {
+        return this.reimbursementRequestDAO.getReimbursementRequestsForEmployeeOfType(id, type);
+    }
+
+    @Override
     public ReimbursementRequest updateReimbursementRequest(ReimbursementRequest reimbursementRequest) {
         if(reimbursementRequest.getDescription().length() == 0){
             throw new RuntimeException("Description cannot be empty.");

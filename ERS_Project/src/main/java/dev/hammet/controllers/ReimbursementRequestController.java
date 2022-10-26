@@ -9,22 +9,23 @@ import io.javalin.http.Handler;
 import java.util.List;
 
 
-class AmountAndDescription {
-    float amount;
-    String description;
-}
+//class AmountAndDescription {
+//    float amount;
+//    String description;
+//}
 public class ReimbursementRequestController {
 
 
     public Handler makeNewReimbursementRequestHandler = (ctx) ->{
         String json = ctx.body();
         Gson gson = new Gson();
-        AmountAndDescription amountAndDescription = gson.fromJson(json, AmountAndDescription.class);
+        ReimbursementRequest newRequest = gson.fromJson(json, ReimbursementRequest.class);
 
         ReimbursementRequest reimbursementRequest = new ReimbursementRequest();
         reimbursementRequest.setEmployeeId(Driver.loggedInEmployee.getId());
-        reimbursementRequest.setAmount(amountAndDescription.amount);
-        reimbursementRequest.setDescription(amountAndDescription.description);
+        reimbursementRequest.setAmount(newRequest.getAmount());
+        reimbursementRequest.setDescription(newRequest.getDescription());
+        reimbursementRequest.setType(newRequest.getType());
 
         try {
             ReimbursementRequest registeredReimbursementRequest = Driver.reimbursementRequestService.createReimbursementRequest(reimbursementRequest);
@@ -61,11 +62,22 @@ public class ReimbursementRequestController {
         String json = gson.toJson(reimbursementRequestList);
         ctx.result(json);
     };
-
+    public Handler showUsersOwnRequestsOfTypeHandler = (ctx) ->{
+     //   int id = Integer.parseInt(ctx.pathParam("id"));
+        System.out.println("showUsersOwnRequestsOfTypeHandler");
+        int id = Driver.loggedInEmployee.getId();
+        ReimbursementRequest.Type type = ReimbursementRequest.Type.valueOf(String.valueOf(ctx.pathParam("type")));
+        System.out.println("::" + type.name());
+        List<ReimbursementRequest> reimbursementRequestList = Driver.reimbursementRequestService.getReimbursementRequestsForEmployeeOfType(id, type);
+        Gson gson = new Gson();
+        String json = gson.toJson(reimbursementRequestList);
+        ctx.result(json);
+    };
     public Handler showUsersOwnRequestsHandler = (ctx) ->{
         System.out.println("ATTEMPTING TO OPEN USER'S OWN REQUESTS");
         int id = Driver.loggedInEmployee.getId();
         List<ReimbursementRequest> reimbursementRequestList = Driver.reimbursementRequestService.getReimbursementRequestsForEmployee(id);
+        System.out.println(reimbursementRequestList);
         Gson gson = new Gson();
         String json = gson.toJson(reimbursementRequestList);
         ctx.result(json);

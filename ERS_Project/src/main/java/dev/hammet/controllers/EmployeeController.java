@@ -153,7 +153,22 @@ public class EmployeeController {
         ctx.status(400);
     };
 
+    public Handler changeRoleHandler = (ctx) ->{
+        int id = Integer.parseInt(ctx.pathParam("id"));
+        boolean toManager =  (Integer.parseInt(ctx.pathParam("role")) >= 1);
 
+        Employee employee = Driver.employeeService.getEmployeeById(id); //gson.fromJson(employeeJSON, Employee.class);
+        Employee changedEmployee = Driver.employeeService.changeEmployeeRole(employee, toManager);
+
+        if (changedEmployee == null) {
+            ctx.result("Failed to change role of " + changedEmployee.getUsername());
+            ctx.status(400);
+        } else {
+
+            ctx.result("Changed role of " + changedEmployee.getUsername() + " " + (toManager?"to ADMIN":"to EMPLOYEE") );
+            ctx.status(200);
+        }
+    };
 
     public Handler createEmployeeHandler = (ctx) ->{
         String json = ctx.body();
@@ -165,7 +180,7 @@ public class EmployeeController {
         ctx.result(employeeJson);
     };
     public Handler getEmployeeByIdHandler = (ctx) ->{
-        int id = Integer.parseInt(ctx.pathParam("id"));//This will take what value was in the {id} and turn it into an int for us to use
+        int id = Integer.parseInt(ctx.pathParam("id"));
         Employee employee = Driver.employeeService.getEmployeeById(id);
         Gson gson = new Gson();
         String json = gson.toJson(employee);

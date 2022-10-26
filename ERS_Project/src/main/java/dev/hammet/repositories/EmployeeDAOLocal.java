@@ -46,6 +46,11 @@ public class EmployeeDAOLocal implements EmployeeDAO {
         return employeeTable.put(employee.getId(), employee);
     }
 
+    @Override
+    public Employee changeEmployeeRole(Employee employee, boolean toManager) {
+        return null;
+    }
+
 
     @Override
     public boolean deleteEmployeeById(int id) {

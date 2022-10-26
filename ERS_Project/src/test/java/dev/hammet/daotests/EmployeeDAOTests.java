@@ -25,33 +25,37 @@ public class EmployeeDAOTests {
     @Order(2)
     void get_employee_by_id_test(){
         Employee gottenEmployee = employeeDAO.getEmployeeById(1);
-        Assertions.assertEquals("mio",gottenEmployee.getPassword());
+        Assertions.assertNotNull(gottenEmployee);
     }
     @Test
     @Order(3)
+    void get_employee_by_username_test(){
+        Employee gottenEmployee = employeeDAO.getEmployeeByUsername("SomeGuy");
+        Assertions.assertEquals("password",gottenEmployee.getPassword());
+    }
+    @Test
+    @Order(4)
     void get_all_employees_test(){
 
         List<Employee> allEmployees = employeeDAO.getAllEmployees();
         for (Employee e : allEmployees) {
             System.out.println(e.toString());
         }
-        Assertions.assertNotNull(allEmployees);
-    }
-    @Test
-    @Order(4)
-    void update_employee_test(){
-        //When testing update, you should either get the book and use its values or create a completely new book and use those values
-        Employee employee = employeeDAO.getEmployeeById(1);
-        //You can think of update more of a full replacement/swap and less of specific values being update
-        Employee employee2 = new Employee(employee.getId(),employee.getUsername(),"hunter3",employee.isManager());
-        employeeDAO.updateEmployee(employee2);
-        Employee updatedEmployee = employeeDAO.getEmployeeById(employee2.getId());
-        Assertions.assertEquals("hunter3",updatedEmployee.getPassword());
+        Assertions.assertTrue((allEmployees.size()> 1));
     }
     @Test
     @Order(5)
+    void update_employee_test(){
+        Employee employee = employeeDAO.getEmployeeByUsername("SomeGuy");
+        Employee employee2 = new Employee(employee.getId(),employee.getUsername(),"hunter2",employee.isManager());
+        employeeDAO.updateEmployee(employee2);
+        Employee updatedEmployee = employeeDAO.getEmployeeByUsername("SomeGuy");
+        Assertions.assertEquals("hunter2",updatedEmployee.getPassword());
+    }
+    @Test
+    @Order(6)
     void delete_employee_by_id_test(){
-        boolean result = employeeDAO.deleteEmployeeById(5);
+        boolean result = employeeDAO.deleteEmployeeById(8);
         Assertions.assertTrue(result);
     }
 

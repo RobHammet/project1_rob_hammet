@@ -47,6 +47,10 @@ public class EmployeeServiceImplementation implements EmployeeService {
         }
         return this.employeeDAO.updateEmployee(employee);
     }
+    @Override
+    public Employee changeEmployeeRole(Employee employee, boolean toManager) {
+        return this.employeeDAO.changeEmployeeRole(employee, toManager);
+    }
 
     @Override
     public boolean deleteEmployeeById(int id) {

@@ -4,15 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="redirect to manager access denied">
+    <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="cleanup, rewrote authenticate, moved some logic to service layer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/EmployeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/ReimbursementRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/ReimbursementRequestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/driver/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/driver/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/entities/ReimbursementRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/entities/ReimbursementRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAOPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAOPostgres.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/ReimbursementRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/ReimbursementRequestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/ReimbursementRequestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/ReimbursementRequestServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/dev/hammet/daotests/EmployeeDAOTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/dev/hammet/daotests/EmployeeDAOTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +81,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmployeeDAOTests.delete_employee_by_id_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReimbursementRequestDAOTests.change_request_status_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ERS_Project" />
       <extension name="coverage">
         <pattern>
@@ -84,14 +90,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
-      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
-      <option name="METHOD_NAME" value="delete_employee_by_id_test" />
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.ReimbursementRequestDAOTests" />
+      <option name="METHOD_NAME" value="change_request_status_test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmployeeDAOTests.get_all_employees_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReimbursementRequestDAOTests.delete_request_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ERS_Project" />
       <extension name="coverage">
         <pattern>
@@ -100,14 +106,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
-      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
-      <option name="METHOD_NAME" value="get_all_employees_test" />
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.ReimbursementRequestDAOTests" />
+      <option name="METHOD_NAME" value="delete_request_test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmployeeDAOTests.get_employee_by_id_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReimbursementRequestDAOTests.get_all_reimbursement_requests_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ERS_Project" />
       <extension name="coverage">
         <pattern>
@@ -116,14 +122,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
-      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
-      <option name="METHOD_NAME" value="get_employee_by_id_test" />
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.ReimbursementRequestDAOTests" />
+      <option name="METHOD_NAME" value="get_all_reimbursement_requests_test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmployeeDAOTests.update_employee_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReimbursementRequestDAOTests.get_requests_for_employee_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ERS_Project" />
       <extension name="coverage">
         <pattern>
@@ -132,8 +138,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
-      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
-      <option name="METHOD_NAME" value="update_employee_test" />
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.ReimbursementRequestDAOTests" />
+      <option name="METHOD_NAME" value="get_requests_for_employee_test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -142,10 +148,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Driver" />
-        <item itemvalue="JUnit.EmployeeDAOTests.delete_employee_by_id_test" />
-        <item itemvalue="JUnit.EmployeeDAOTests.update_employee_test" />
-        <item itemvalue="JUnit.EmployeeDAOTests.get_all_employees_test" />
-        <item itemvalue="JUnit.EmployeeDAOTests.get_employee_by_id_test" />
+        <item itemvalue="JUnit.ReimbursementRequestDAOTests.get_all_reimbursement_requests_test" />
+        <item itemvalue="JUnit.ReimbursementRequestDAOTests.change_request_status_test" />
+        <item itemvalue="JUnit.ReimbursementRequestDAOTests.get_requests_for_employee_test" />
+        <item itemvalue="JUnit.ReimbursementRequestDAOTests.delete_request_test" />
       </list>
     </recent_temporary>
   </component>
@@ -263,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666742385153</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="cleanup, rewrote authenticate, moved some logic to service layer">
+      <created>1666806414118</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1666806414118</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -288,6 +301,7 @@
     <MESSAGE value="added user can see own tickets feature" />
     <MESSAGE value="cleanup" />
     <MESSAGE value="redirect to manager access denied" />
-    <option name="LAST_COMMIT_MESSAGE" value="redirect to manager access denied" />
+    <MESSAGE value="cleanup, rewrote authenticate, moved some logic to service layer" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleanup, rewrote authenticate, moved some logic to service layer" />
   </component>
 </project>

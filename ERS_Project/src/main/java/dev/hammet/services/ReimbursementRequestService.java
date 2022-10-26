@@ -13,6 +13,7 @@ public interface ReimbursementRequestService {
 
     List<ReimbursementRequest> getAllReimbursementRequests();
     List<ReimbursementRequest> getReimbursementRequestsForEmployee(int id);
+    List<ReimbursementRequest> getReimbursementRequestsForEmployeeOfType(int id, ReimbursementRequest.Type type);
     //UPDATE
     ReimbursementRequest updateReimbursementRequest(ReimbursementRequest reimbursementRequest);
     //DELETE

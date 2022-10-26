@@ -12,7 +12,10 @@ public interface ReimbursementRequestDAO {
     //READ
     ReimbursementRequest getReimbursementRequestById(int id);
     List<ReimbursementRequest> getAllReimbursementRequests();
+
     List<ReimbursementRequest> getReimbursementRequestsForEmployee(int id);
+
+    List<ReimbursementRequest> getReimbursementRequestsForEmployeeOfType(int id, ReimbursementRequest.Type type);
     //UPDATE
     ReimbursementRequest updateReimbursementRequest(ReimbursementRequest reimbursementRequest);
 

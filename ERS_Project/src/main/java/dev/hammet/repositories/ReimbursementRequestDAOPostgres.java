@@ -15,13 +15,16 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
 
         try(Connection connection = ConnectionFactory.getConnection()){
             // INSERT INTO reimbursement_requests VALUES (DEFAULT, 'vacay yall', '5000.29', default, 2);
-            String sql = "insert into reimbursement_requests values (default, ?, ?, default, ?)";
+            //                                                      id,    descr,amt,status,type,eid
+            String sql = "insert into reimbursement_requests values (default, ?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, reimbursementRequest.getDescription());
             preparedStatement.setFloat(2,reimbursementRequest.getAmount());
-            preparedStatement.setInt(3,reimbursementRequest.getEmployeeId());
+            preparedStatement.setString(3, reimbursementRequest.getStatus().name());
+            preparedStatement.setString(4, reimbursementRequest.getType().name());
+            preparedStatement.setInt(5,reimbursementRequest.getEmployeeId());
 
 
             preparedStatement.execute();
@@ -94,7 +97,6 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
 
     @Override
     public List<ReimbursementRequest> getReimbursementRequestsForEmployee(int id) {
-
         try (Connection connection = ConnectionFactory.getConnection()) {
             String sql = "select * from reimbursement_requests where e_id=?";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -110,8 +112,44 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
                 reimbursementRequest.setDescription(rs.getString("r_description"));
                 reimbursementRequest.setAmount(rs.getFloat("r_amount"));
                 reimbursementRequest.setStatus(ReimbursementRequest.Status.valueOf(rs.getString("r_status")));                reimbursementRequest.setEmployeeId(rs.getInt("e_id"));
-
+                reimbursementRequest.setType(ReimbursementRequest.Type.valueOf(rs.getString("r_type")));
                 reimbursementRequestList.add(reimbursementRequest);
+            }
+
+            return reimbursementRequestList;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<ReimbursementRequest> getReimbursementRequestsForEmployeeOfType(int id, ReimbursementRequest.Type type) {
+        System.out.println("getting of type " + type.name() + " for employee#" + id);
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String sql = "select * from reimbursement_requests where e_id=? and r_type=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.setString(2, type.name());
+            ResultSet rs = ps.executeQuery();
+
+            List<ReimbursementRequest> reimbursementRequestList = new ArrayList<>();
+
+            while (rs.next()) {
+
+                ReimbursementRequest reimbursementRequest = new ReimbursementRequest();
+                reimbursementRequest.setId(rs.getInt("r_id"));
+                reimbursementRequest.setDescription(rs.getString("r_description"));
+                reimbursementRequest.setAmount(rs.getFloat("r_amount"));
+                reimbursementRequest.setStatus(ReimbursementRequest.Status.valueOf(rs.getString("r_status")));                reimbursementRequest.setEmployeeId(rs.getInt("e_id"));
+                reimbursementRequest.setType(ReimbursementRequest.Type.valueOf(rs.getString("r_type")));
+                reimbursementRequestList.add(reimbursementRequest);
+            }
+
+            for (ReimbursementRequest r : reimbursementRequestList) {
+                System.out.println(r);
             }
 
             return reimbursementRequestList;
@@ -136,6 +174,7 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
             preparedStatement.setFloat(2,reimbursementRequest.getAmount());
             preparedStatement.setString(3,reimbursementRequest.getStatus().name());
             preparedStatement.setInt(4,reimbursementRequest.getEmployeeId());
+            preparedStatement.setInt(5, reimbursementRequest.getId());
 
             preparedStatement.executeUpdate();
 
@@ -190,8 +229,8 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
         }
         catch (SQLException e){
             e.printStackTrace();
+            return false;
         }
-        return false;
 
     }
 }

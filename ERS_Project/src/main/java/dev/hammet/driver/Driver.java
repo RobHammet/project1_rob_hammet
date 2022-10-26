@@ -38,11 +38,14 @@ public class Driver {
         app.put("/update-profile", employeeController.updateProfileHandler);
         // --- request-related:
         app.get("/my-requests", reimbursementRequestController.showUsersOwnRequestsHandler);
+        app.get("/my-requests/{type}", reimbursementRequestController.showUsersOwnRequestsOfTypeHandler);
+
         app.post("/make_new_reimbursement_request", reimbursementRequestController.makeNewReimbursementRequestHandler);
 
         // only logged in managers can use (other employees' requests)
         // --- employee-related:
         app.get("/manager/get_all_employees", employeeController.getAllEmployees);
+        app.put("/manager/change-role/{id}-{role}", employeeController.changeRoleHandler);
         // --- request-related:
         app.get("/manager/get_reimbursement_requests_for/{id}", reimbursementRequestController.getReimbursementRequestsForEmployeeHandler);
         app.get("/manager/get_all_reimbursement_requests", reimbursementRequestController.getAllReimbursementRequestsHandler);

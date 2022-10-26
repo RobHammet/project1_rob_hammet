@@ -8,7 +8,15 @@ public class ReimbursementRequest {
         APPROVED,
         DENIED
     };
+    public enum Type {
+        TRAVEL,
+        LODGING,
+        FOOD,
+        OTHER
+    }
     private Status status;
+
+    private Type type;
     private String description;
     private float amount;
 
@@ -17,9 +25,10 @@ public class ReimbursementRequest {
 
     public ReimbursementRequest() {
         this.status = Status.PENDING;
+        this.type = Type.OTHER;
     }
 
-    public ReimbursementRequest(int id, int employeeId, float amount, String description) {
+    public ReimbursementRequest(int id, int employeeId, float amount, String description, Type type) {
 
         this.id = id;
         this.employeeId = employeeId;
@@ -28,6 +37,7 @@ public class ReimbursementRequest {
         this.description = description;
 
         this.status = Status.PENDING;
+        this.type = Type.OTHER;
     }
 
 
@@ -71,11 +81,19 @@ public class ReimbursementRequest {
         this.status = status;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
 
     @Override
     public String toString() {
         return "ReimbursementRequest{" +
-                "status=" + status +
+                "status=" + status.name() +
+                ", type=" + type.name() +
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
                 ", id=" + id +

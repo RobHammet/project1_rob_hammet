@@ -14,6 +14,7 @@ public interface EmployeeService {
     List<Employee> getAllEmployees();
     //UPDATE
     Employee updateEmployee(Employee employee);
+    Employee changeEmployeeRole(Employee employee, boolean toManager);
     //DELETE
     boolean deleteEmployeeById(int id);
 
