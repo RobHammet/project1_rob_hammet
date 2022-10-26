@@ -42,7 +42,8 @@ public class EmployeeController {
             } else {
                 Employee registeredEmployee = Driver.employeeService.createEmployee(newUser);
                 ctx.status(201);
-                ctx.result("Successfully registered account of username: " + registeredEmployee.getUsername() );
+                ctx.result("Successfully registered account of username: " + registeredEmployee.getUsername() +
+                        (registeredEmployee.isManager() ? "as ADMIN": ""));
             }
         } catch (RuntimeException e) {
             ctx.status(400);
@@ -61,7 +62,7 @@ public class EmployeeController {
 
             if(ret == 2){
                 ctx.result("Logged in successfully as " + Driver.loggedInEmployee.getUsername() + " *" +
-                        (Driver.loggedInEmployee.isManager()? "with" : "without") + "* manager privileges");
+                        (Driver.loggedInEmployee.isManager()? "with" : "without") + "* ADMIN privileges");
 
                 ctx.status(Driver.loggedInEmployee.isManager()? 201 : 200);
             } else if (ret == 1) {
@@ -80,29 +81,21 @@ public class EmployeeController {
     };
 
     public Handler logoutHandler = (ctx) ->{
-        System.out.println("ATTEMPTING LOG OUT...");
         if(Driver.loggedInEmployee != null){
+
             String username = Driver.loggedInEmployee.getUsername();
 
-            Driver.loggedInEmployee = null;
-            System.gc();
-            System.runFinalization();
+            Driver.employeeService.logout();
 
             ctx.result(username + " logged out successfully!");
             ctx.status(200);
-            System.out.println("LOGGED OUT");
         } else{
             ctx.status(400);
             ctx.result("Cannot log out: no user logged in" );
-            System.out.println("LOG OUT FAILED");
         }
 
     };
 
-    public Handler kickOutNonManagerHandler = (ctx) ->{
-        ctx.result("Access denied: not a manager");
-        ctx.status(400);
-    };
 
     public Handler loadProfileHandler = (ctx) ->{
 
@@ -124,6 +117,7 @@ public class EmployeeController {
         UserAndPassword userAndPassword = gson.fromJson(json, UserAndPassword.class);
 
         try {
+            // move to service
             // make a new employee object based on logged-in user, updating user & pwd
             Employee modifiedEmployee = new Employee(Driver.loggedInEmployee.getId(),
                                                     userAndPassword.username,
@@ -141,24 +135,25 @@ public class EmployeeController {
             ctx.result("Profile update unsuccessful: " + e.getMessage() );
         }
     };
+    public Handler getAllEmployees = (ctx) ->{
+        List<Employee> employeeList = Driver.employeeService.getAllEmployees();
+        Gson gson = new Gson();
+        String json = gson.toJson(employeeList);
+        ctx.result(json);
+    };
 
     public Handler checkManagerHandler = (ctx) ->{
 
         if (!Driver.loggedInEmployee.isManager())
             ctx.redirect("/kick");
-//        try {
-//            if (!Driver.loggedInEmployee.isManager()) {
-//
-//                throw new RuntimeException("Not a manager, throwing...");
-//            }
-//        } catch (RuntimeException e) {
-//            System.out.println(e.getMessage());
-//            System.out.println(e.getMessage());
-//            System.out.println(e.getMessage());
-//            System.out.println(e.getMessage());
-//            ctx.redirect("/kick");
-//        }
     };
+
+    public Handler kickOutNonManagerHandler = (ctx) ->{
+        ctx.result("Access denied: not an ADMIN");
+        ctx.status(400);
+    };
+
+
 
     public Handler createEmployeeHandler = (ctx) ->{
         String json = ctx.body();
@@ -169,15 +164,6 @@ public class EmployeeController {
         ctx.status(201);
         ctx.result(employeeJson);
     };
-
-
-    public Handler getAllEmployees = (ctx) ->{
-        List<Employee> employeeList = Driver.employeeService.getAllEmployees();
-        Gson gson = new Gson();
-        String json = gson.toJson(employeeList);
-        ctx.result(json);
-    };
-
     public Handler getEmployeeByIdHandler = (ctx) ->{
         int id = Integer.parseInt(ctx.pathParam("id"));//This will take what value was in the {id} and turn it into an int for us to use
         Employee employee = Driver.employeeService.getEmployeeById(id);

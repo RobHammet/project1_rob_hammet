@@ -23,4 +23,6 @@ public interface EmployeeService {
 
     Employee registerNewUser(String username, String password);
 
+    void logout();
+
 }

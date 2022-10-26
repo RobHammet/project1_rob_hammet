@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="cleanup">
+    <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="redirect to manager access denied">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/ReimbursementRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/ReimbursementRequestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/driver/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/driver/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAOPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAOPostgres.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/dev/hammet/daotests/EmployeeDAOTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/dev/hammet/daotests/EmployeeDAOTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,38 +75,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ConnectionTests.connection_available" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ERS_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="dev.hammet.smoketests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="dev.hammet.smoketests" />
-      <option name="MAIN_CLASS_NAME" value="dev.hammet.smoketests.ConnectionTests" />
-      <option name="METHOD_NAME" value="connection_available" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="EmployeeDAOTests.create_employee_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ERS_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="dev.hammet.daotests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
-      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
-      <option name="METHOD_NAME" value="create_employee_test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="EmployeeDAOTests.delete_employee_by_id_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ERS_Project" />
       <extension name="coverage">
@@ -113,6 +86,22 @@
       <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
       <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
       <option name="METHOD_NAME" value="delete_employee_by_id_test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmployeeDAOTests.get_all_employees_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ERS_Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.hammet.daotests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
+      <option name="METHOD_NAME" value="get_all_employees_test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -134,13 +123,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="EmployeeDAOTests.update_employee_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ERS_Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dev.hammet.daotests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dev.hammet.daotests" />
+      <option name="MAIN_CLASS_NAME" value="dev.hammet.daotests.EmployeeDAOTests" />
+      <option name="METHOD_NAME" value="update_employee_test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Driver" />
-        <item itemvalue="JUnit.EmployeeDAOTests.create_employee_test" />
-        <item itemvalue="JUnit.ConnectionTests.connection_available" />
-        <item itemvalue="JUnit.EmployeeDAOTests.get_employee_by_id_test" />
         <item itemvalue="JUnit.EmployeeDAOTests.delete_employee_by_id_test" />
+        <item itemvalue="JUnit.EmployeeDAOTests.update_employee_test" />
+        <item itemvalue="JUnit.EmployeeDAOTests.get_all_employees_test" />
+        <item itemvalue="JUnit.EmployeeDAOTests.get_employee_by_id_test" />
       </list>
     </recent_temporary>
   </component>
@@ -251,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666641164333</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="redirect to manager access denied">
+      <created>1666742385153</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1666742385153</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -275,6 +287,7 @@
     <MESSAGE value="added logout and some manager privileges" />
     <MESSAGE value="added user can see own tickets feature" />
     <MESSAGE value="cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleanup" />
+    <MESSAGE value="redirect to manager access denied" />
+    <option name="LAST_COMMIT_MESSAGE" value="redirect to manager access denied" />
   </component>
 </project>

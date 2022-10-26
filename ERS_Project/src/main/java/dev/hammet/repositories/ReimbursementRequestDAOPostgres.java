@@ -139,10 +139,6 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
 
             preparedStatement.executeUpdate();
 
-//            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-//            resultSet.next();
-//            int generatedKey = resultSet.getInt("id");
-//            employee.setId(generatedKey);
             return reimbursementRequest;
         }
         catch (SQLException e){

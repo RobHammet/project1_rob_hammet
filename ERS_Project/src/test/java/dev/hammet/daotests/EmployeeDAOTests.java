@@ -17,7 +17,7 @@ public class EmployeeDAOTests {
     @Test
     @Order(1)
     void create_employee_test(){
-        Employee newEmployee = new Employee(0,"TomAnderson","hunter2",true);
+        Employee newEmployee = new Employee(0,"SomeGuy","password",true);
         Employee savedEmployee = employeeDAO.createEmployee(newEmployee);
         Assertions.assertNotEquals(0,savedEmployee.getId());
     }
@@ -25,7 +25,7 @@ public class EmployeeDAOTests {
     @Order(2)
     void get_employee_by_id_test(){
         Employee gottenEmployee = employeeDAO.getEmployeeById(1);
-        Assertions.assertEquals("hunter2",gottenEmployee.getPassword());
+        Assertions.assertEquals("mio",gottenEmployee.getPassword());
     }
     @Test
     @Order(3)
@@ -51,7 +51,7 @@ public class EmployeeDAOTests {
     @Test
     @Order(5)
     void delete_employee_by_id_test(){
-        boolean result = employeeDAO.deleteEmployeeById(1);
+        boolean result = employeeDAO.deleteEmployeeById(5);
         Assertions.assertTrue(result);
     }
 

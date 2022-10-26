@@ -55,31 +55,21 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
     @Override
     public int authenticateUser(String username, String password) {
-//        System.out.println("NEW AUTHENTICATE RUNNING...");
-//        Employee attemptedLoginEmployee = getEmployeeByUsername(username);
-//        if (attemptedLoginEmployee == null) {
-//            System.out.println("EMPLOYEE WITH THAT USERNAME NOT FOUND");
-//            return 0;
-//        } else {
-//            Driver.loggedInEmployee = attemptedLoginEmployee;
-//            return 2;
-//        }
+        int returnValue = 0;
+        Employee checkEmployee = Driver.employeeService.getEmployeeByUsername(username);
+        if (checkEmployee != null) {
+            if (checkEmployee.getPassword().trim().equals( password.trim())) {
+                Driver.loggedInEmployee = checkEmployee;
+                returnValue = 2;
 
-        int ret = 0;
-        List<Employee> employeeList = Driver.employeeService.getAllEmployees();
-        for (Employee e : employeeList) {
-            if (e.getUsername().trim().equals(username.trim())) {
-                if (e.getPassword().trim().equals(password.trim())) {
-                    Driver.loggedInEmployee = e;
-                    ret = 2;
-                    break;
-                } else {
-                    ret = 1;
-                    break;
-                }
+            } else {
+                returnValue = 1;
             }
+        } else {
+            returnValue = 0;
         }
-        return ret;
+        return returnValue;
+
     }
 
     @Override
@@ -89,18 +79,24 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
     @Override
     public Employee registerNewUser(String username, String password) {
-        Employee ret = new Employee(0, username, password, false);
-        List<Employee> employeeList = Driver.employeeService.getAllEmployees();
-        for (Employee e : employeeList) {
-            if (e.getUsername().trim().equals(username.trim())) {
-                ret = null;
-                break;
-            }
+        Employee returnEmployee = null;
+        Employee checkEmployee = Driver.employeeService.getEmployeeByUsername(username);
+        if (checkEmployee == null) {
+            returnEmployee = new Employee(0, username, password, false);
+            if (username.toLowerCase().contains("admin"))
+                returnEmployee.setManager(true);
         }
-        return ret;
+        return returnEmployee;
     }
 
+    @Override
+    public void logout() {
 
+        Driver.loggedInEmployee = null;
+        System.gc();
+        System.runFinalization();
+
+    }
 
 
 }
