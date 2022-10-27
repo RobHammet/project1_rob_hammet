@@ -19,7 +19,7 @@ public class ReimbursementRequestServiceImpl implements ReimbursementRequestServ
     @Override
     public ReimbursementRequest createReimbursementRequest(ReimbursementRequest reimbursementRequest) {
 
-        if(reimbursementRequest.getDescription().length() == 0){
+        if(reimbursementRequest.getDescription() == null || reimbursementRequest.getDescription().length() == 0){
             throw new RuntimeException("Description cannot be empty.");
         }
 
@@ -28,6 +28,7 @@ public class ReimbursementRequestServiceImpl implements ReimbursementRequestServ
             throw new RuntimeException("Amount cannot be zero or in excess of 50000 dollars.");
         }
         try {
+            reimbursementRequest.setEmployeeId(Driver.loggedInEmployee.getId());
             ReimbursementRequest savedReimbursementRequest = this.reimbursementRequestDAO.createReimbursementRequest(reimbursementRequest);
 
             System.out.println(savedReimbursementRequest.toString());
@@ -49,6 +50,10 @@ public class ReimbursementRequestServiceImpl implements ReimbursementRequestServ
     public List<ReimbursementRequest> getAllReimbursementRequests() {
         return this.reimbursementRequestDAO.getAllReimbursementRequests();
     }
+    @Override
+    public List<ReimbursementRequest> getAllPendingReimbursementRequests() {
+        return this.reimbursementRequestDAO.getAllPendingReimbursementRequests();
+    }
 
     @Override
     public List<ReimbursementRequest> getReimbursementRequestsForEmployee(int id) {
@@ -58,6 +63,10 @@ public class ReimbursementRequestServiceImpl implements ReimbursementRequestServ
     @Override
     public List<ReimbursementRequest> getReimbursementRequestsForEmployeeOfType(int id, ReimbursementRequest.Type type) {
         return this.reimbursementRequestDAO.getReimbursementRequestsForEmployeeOfType(id, type);
+    }
+    @Override
+    public List<ReimbursementRequest> getPendingReimbursementRequestsOfType(ReimbursementRequest.Type type) {
+        return this.reimbursementRequestDAO.getPendingReimbursementRequestsOfType(type);
     }
 
     @Override
@@ -70,6 +79,15 @@ public class ReimbursementRequestServiceImpl implements ReimbursementRequestServ
         }
         return this.reimbursementRequestDAO.updateReimbursementRequest(reimbursementRequest);
     }
+
+    @Override
+    public ReimbursementRequest appendReceiptToReimbursementRequest(ReimbursementRequest request, byte[] bytes) {
+        if (bytes.length <= 0) {
+            return null;
+        } else
+            return this.reimbursementRequestDAO.appendReceiptToReimbursementRequest(request, bytes);
+    }
+
 
     @Override
     public boolean deleteReimbursementRequestById(int id) {

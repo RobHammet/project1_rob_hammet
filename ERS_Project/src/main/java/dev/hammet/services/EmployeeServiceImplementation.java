@@ -45,7 +45,28 @@ public class EmployeeServiceImplementation implements EmployeeService {
         if(employee.getPassword().length() == 0){
             throw new RuntimeException("Password cannot be empty");
         }
-        return this.employeeDAO.updateEmployee(employee);
+        if (employee.getFirstname() == null)
+            employee.setFirstname("");
+        if (employee.getLastname() == null)
+            employee.setLastname("");
+        if (employee.getEmail() == null)
+            employee.setEmail("");
+
+        Employee modifiedEmployee = new Employee(Driver.loggedInEmployee.getId(),
+                                                    employee.getUsername(),
+                                                    employee.getPassword(),
+                                                    employee.isManager(),
+                                                    employee.getFirstname(),
+                                                    employee.getLastname(),
+                                                    employee.getEmail()       );
+        return this.employeeDAO.updateEmployee(modifiedEmployee);
+    }
+
+
+    @Override
+    public Employee appendPhotoToEmployee(Employee employee, byte[] bytes) {
+
+        return this.employeeDAO.appendPhotoToEmployee(employee, bytes);
     }
     @Override
     public Employee changeEmployeeRole(Employee employee, boolean toManager) {
@@ -86,7 +107,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
         Employee returnEmployee = null;
         Employee checkEmployee = Driver.employeeService.getEmployeeByUsername(username);
         if (checkEmployee == null) {
-            returnEmployee = new Employee(0, username, password, false);
+            returnEmployee = new Employee(0, username, password, false, "", "", "");
             if (username.toLowerCase().contains("admin"))
                 returnEmployee.setManager(true);
         }

@@ -36,9 +36,11 @@ public class Driver {
         app.get("/logout", employeeController.logoutHandler);
         app.get("/profile", employeeController.loadProfileHandler);
         app.put("/update-profile", employeeController.updateProfileHandler);
+        app.post("/upload-photo", employeeController.uploadPhotoHandler);
         // --- request-related:
         app.get("/my-requests", reimbursementRequestController.showUsersOwnRequestsHandler);
         app.get("/my-requests/{type}", reimbursementRequestController.showUsersOwnRequestsOfTypeHandler);
+        app.post("/my-requests/upload-receipt/{id}", reimbursementRequestController.uploadReceiptHandler);
 
         app.post("/make_new_reimbursement_request", reimbursementRequestController.makeNewReimbursementRequestHandler);
 
@@ -48,6 +50,7 @@ public class Driver {
         app.put("/manager/change-role/{id}-{role}", employeeController.changeRoleHandler);
         // --- request-related:
         app.get("/manager/get_reimbursement_requests_for/{id}", reimbursementRequestController.getReimbursementRequestsForEmployeeHandler);
+        app.get("/manager/get_pending_reimbursement_requests/{type}", reimbursementRequestController.getPendingReimbursementRequestsOfTypeHandler);
         app.get("/manager/get_all_reimbursement_requests", reimbursementRequestController.getAllReimbursementRequestsHandler);
         app.get("/manager/get_pending_reimbursement_requests", reimbursementRequestController.getPendingReimbursementRequestsHandler);
         app.put("/manager/change_reimbursement_request_status/{id}-{st}", reimbursementRequestController.changeReimbursementRequestStatusHandler);

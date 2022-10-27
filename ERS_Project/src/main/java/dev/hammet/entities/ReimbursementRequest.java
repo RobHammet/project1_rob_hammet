@@ -23,9 +23,12 @@ public class ReimbursementRequest {
     private int id;
     private int employeeId;
 
+    private byte[] receipt_img;
+
     public ReimbursementRequest() {
         this.status = Status.PENDING;
         this.type = Type.OTHER;
+        this.receipt_img = null;
     }
 
     public ReimbursementRequest(int id, int employeeId, float amount, String description, Type type) {
@@ -38,8 +41,16 @@ public class ReimbursementRequest {
 
         this.status = Status.PENDING;
         this.type = Type.OTHER;
+        this.receipt_img = null;
     }
 
+    public byte[] getReceiptImage() {
+        return receipt_img;
+    }
+
+    public void setReceiptImage(byte[] receipt_img) {
+        this.receipt_img = receipt_img;
+    }
 
     public int getId() {
         return id;
@@ -98,6 +109,7 @@ public class ReimbursementRequest {
                 ", amount=" + amount +
                 ", id=" + id +
                 ", employeeId=" + employeeId +
+                ", receipt_img(size)=" + (receipt_img == null? 0: receipt_img.length) +
                 '}';
     }
 }

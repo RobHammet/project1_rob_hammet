@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="cleanup, rewrote authenticate, moved some logic to service layer">
+    <list default="true" id="14540ac6-6f96-48b1-8cfd-c0859667aace" name="Changes" comment="stretch goals: change user role, filterable ticket types">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/EmployeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/ReimbursementRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/controllers/ReimbursementRequestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/driver/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/driver/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/entities/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/entities/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/entities/ReimbursementRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/entities/ReimbursementRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOLocal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/EmployeeDAOPostgres.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAOPostgres.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/repositories/ReimbursementRequestDAOPostgres.java" afterDir="false" />
@@ -19,7 +19,14 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/EmployeeServiceImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/ReimbursementRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/ReimbursementRequestService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hammet/services/ReimbursementRequestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hammet/services/ReimbursementRequestServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/dev/hammet/daotests/EmployeeDAOTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/dev/hammet/daotests/EmployeeDAOTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/controllers/EmployeeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/controllers/EmployeeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/controllers/ReimbursementRequestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/controllers/ReimbursementRequestController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/driver/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/driver/Driver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/entities/ReimbursementRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/entities/ReimbursementRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/ReimbursementRequestDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/ReimbursementRequestDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/ReimbursementRequestDAOPostgres.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/repositories/ReimbursementRequestDAOPostgres.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/services/ReimbursementRequestService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/services/ReimbursementRequestService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/hammet/services/ReimbursementRequestServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/hammet/services/ReimbursementRequestServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,7 +283,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666806414118</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="stretch goals: change user role, filterable ticket types">
+      <created>1666824916780</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1666824916780</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -302,6 +316,17 @@
     <MESSAGE value="cleanup" />
     <MESSAGE value="redirect to manager access denied" />
     <MESSAGE value="cleanup, rewrote authenticate, moved some logic to service layer" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleanup, rewrote authenticate, moved some logic to service layer" />
+    <MESSAGE value="stretch goals: change user role, filterable ticket types" />
+    <option name="LAST_COMMIT_MESSAGE" value="stretch goals: change user role, filterable ticket types" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -1,6 +1,5 @@
 package dev.hammet.repositories;
 
-import dev.hammet.entities.Employee;
 import dev.hammet.entities.ReimbursementRequest;
 import dev.hammet.util.ConnectionFactory;
 
@@ -16,7 +15,7 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
         try(Connection connection = ConnectionFactory.getConnection()){
             // INSERT INTO reimbursement_requests VALUES (DEFAULT, 'vacay yall', '5000.29', default, 2);
             //                                                      id,    descr,amt,status,type,eid
-            String sql = "insert into reimbursement_requests values (default, ?, ?, ?, ?, ?)";
+            String sql = "insert into reimbursement_requests values (default, ?, ?, ?, ?, null, ?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -58,6 +57,9 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
             reimbursementRequest.setAmount(rs.getFloat("r_amount"));
             reimbursementRequest.setStatus(ReimbursementRequest.Status.valueOf(rs.getString("r_status")));
             reimbursementRequest.setEmployeeId(rs.getInt("e_id"));
+            reimbursementRequest.setType(ReimbursementRequest.Type.valueOf(rs.getString("r_type")));
+            reimbursementRequest.setReceiptImage(rs.getBytes("r_receipt_img"));
+
             return reimbursementRequest;
 
         } catch (SQLException e) {
@@ -82,6 +84,8 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
                 reimbursementRequest.setDescription(rs.getString("r_description"));
                 reimbursementRequest.setAmount(rs.getFloat("r_amount"));
                 reimbursementRequest.setStatus(ReimbursementRequest.Status.valueOf(rs.getString("r_status")));                reimbursementRequest.setEmployeeId(rs.getInt("e_id"));
+                reimbursementRequest.setType(ReimbursementRequest.Type.valueOf(rs.getString("r_type")));
+                reimbursementRequest.setReceiptImage(rs.getBytes("r_receipt_img"));
 
                 reimbursementRequestList.add(reimbursementRequest);
             }
@@ -95,6 +99,36 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
         }
     }
 
+    @Override
+    public List<ReimbursementRequest> getAllPendingReimbursementRequests() {
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String sql = "select * from reimbursement_requests where r_status='PENDING'";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            List<ReimbursementRequest> reimbursementRequestList = new ArrayList<>();
+
+            while (rs.next()) {
+
+                ReimbursementRequest reimbursementRequest = new ReimbursementRequest();
+                reimbursementRequest.setId(rs.getInt("r_id"));
+                reimbursementRequest.setDescription(rs.getString("r_description"));
+                reimbursementRequest.setAmount(rs.getFloat("r_amount"));
+                reimbursementRequest.setStatus(ReimbursementRequest.Status.valueOf(rs.getString("r_status")));                reimbursementRequest.setEmployeeId(rs.getInt("e_id"));
+                reimbursementRequest.setType(ReimbursementRequest.Type.valueOf(rs.getString("r_type")));
+                reimbursementRequest.setReceiptImage(rs.getBytes("r_receipt_img"));
+
+                reimbursementRequestList.add(reimbursementRequest);
+            }
+
+            return reimbursementRequestList;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     @Override
     public List<ReimbursementRequest> getReimbursementRequestsForEmployee(int id) {
         try (Connection connection = ConnectionFactory.getConnection()) {
@@ -113,6 +147,8 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
                 reimbursementRequest.setAmount(rs.getFloat("r_amount"));
                 reimbursementRequest.setStatus(ReimbursementRequest.Status.valueOf(rs.getString("r_status")));                reimbursementRequest.setEmployeeId(rs.getInt("e_id"));
                 reimbursementRequest.setType(ReimbursementRequest.Type.valueOf(rs.getString("r_type")));
+                reimbursementRequest.setReceiptImage(rs.getBytes("r_receipt_img"));
+
                 reimbursementRequestList.add(reimbursementRequest);
             }
 
@@ -127,7 +163,7 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
 
     @Override
     public List<ReimbursementRequest> getReimbursementRequestsForEmployeeOfType(int id, ReimbursementRequest.Type type) {
-        System.out.println("getting of type " + type.name() + " for employee#" + id);
+
         try (Connection connection = ConnectionFactory.getConnection()) {
             String sql = "select * from reimbursement_requests where e_id=? and r_type=?";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -145,12 +181,45 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
                 reimbursementRequest.setAmount(rs.getFloat("r_amount"));
                 reimbursementRequest.setStatus(ReimbursementRequest.Status.valueOf(rs.getString("r_status")));                reimbursementRequest.setEmployeeId(rs.getInt("e_id"));
                 reimbursementRequest.setType(ReimbursementRequest.Type.valueOf(rs.getString("r_type")));
+                reimbursementRequest.setReceiptImage(rs.getBytes("r_receipt_img"));
+
                 reimbursementRequestList.add(reimbursementRequest);
             }
 
-            for (ReimbursementRequest r : reimbursementRequestList) {
-                System.out.println(r);
+
+            return reimbursementRequestList;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<ReimbursementRequest> getPendingReimbursementRequestsOfType(ReimbursementRequest.Type type) {
+
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String sql = "select * from reimbursement_requests where r_type=? and r_status='PENDING'";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, type.name());
+            ResultSet rs = ps.executeQuery();
+
+            List<ReimbursementRequest> reimbursementRequestList = new ArrayList<>();
+
+            while (rs.next()) {
+
+                ReimbursementRequest reimbursementRequest = new ReimbursementRequest();
+                reimbursementRequest.setId(rs.getInt("r_id"));
+                reimbursementRequest.setDescription(rs.getString("r_description"));
+                reimbursementRequest.setAmount(rs.getFloat("r_amount"));
+                reimbursementRequest.setStatus(ReimbursementRequest.Status.valueOf(rs.getString("r_status")));                reimbursementRequest.setEmployeeId(rs.getInt("e_id"));
+                reimbursementRequest.setType(ReimbursementRequest.Type.valueOf(rs.getString("r_type")));
+                reimbursementRequest.setReceiptImage(rs.getBytes("r_receipt_img"));
+
+                reimbursementRequestList.add(reimbursementRequest);
             }
+
 
             return reimbursementRequestList;
 
@@ -179,6 +248,29 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
             preparedStatement.executeUpdate();
 
             return reimbursementRequest;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ReimbursementRequest appendReceiptToReimbursementRequest(ReimbursementRequest request, byte[] bytes) {
+        System.out.println("[[appendReceiptToReimbursementRequest]] adding this much: " + bytes.length);
+        try(Connection connection = ConnectionFactory.getConnection()){
+            //UPDATE books SET title = 'It Ends with Us', author = 'Colleen Hoover' WHERE id = 2;
+            String sql = "update reimbursement_requests set r_receipt_img=? where r_id=?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setBytes(1, bytes);
+            preparedStatement.setInt(2, request.getId());
+
+            preparedStatement.executeUpdate();
+
+            request.setReceiptImage(bytes);
+            return request;
         }
         catch (SQLException e){
             e.printStackTrace();

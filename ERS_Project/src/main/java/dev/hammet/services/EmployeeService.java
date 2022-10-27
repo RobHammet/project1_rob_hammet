@@ -1,6 +1,7 @@
 package dev.hammet.services;
 
 import dev.hammet.entities.Employee;
+import dev.hammet.entities.ReimbursementRequest;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public interface EmployeeService {
     //UPDATE
     Employee updateEmployee(Employee employee);
     Employee changeEmployeeRole(Employee employee, boolean toManager);
+    Employee appendPhotoToEmployee(Employee employee, byte[] bytes);
+
     //DELETE
     boolean deleteEmployeeById(int id);
 
