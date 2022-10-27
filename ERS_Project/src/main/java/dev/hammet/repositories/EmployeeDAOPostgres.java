@@ -1,6 +1,7 @@
 package dev.hammet.repositories;
 
 import dev.hammet.entities.Employee;
+import dev.hammet.entities.ReimbursementRequest;
 import dev.hammet.util.ConnectionFactory;
 
 import java.sql.*;
@@ -11,7 +12,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
     @Override
     public Employee createEmployee(Employee employee) {
         try(Connection connection = ConnectionFactory.getConnection()){
-            String sql = "insert into employees values(default, ?, ? , ?)";
+            String sql = "insert into employees values(default, ?, ?, ?, '', '', '', null)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, employee.getUsername());
             preparedStatement.setString(2,employee.getPassword());
@@ -46,6 +47,10 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             employee.setUsername(rs.getString("username"));
             employee.setPassword(rs.getString("password"));
             employee.setManager(rs.getBoolean("isManager"));
+            employee.setFirstname(rs.getString("firstname"));
+            employee.setLastname(rs.getString("lastname"));
+            employee.setEmail(rs.getString("email"));
+            employee.setPhoto(rs.getBytes("photo"));
 
             return employee;
 
@@ -72,6 +77,10 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             employee.setUsername(rs.getString("username"));
             employee.setPassword(rs.getString("password"));
             employee.setManager(rs.getBoolean("isManager"));
+            employee.setFirstname(rs.getString("firstname"));
+            employee.setLastname(rs.getString("lastname"));
+            employee.setEmail(rs.getString("email"));
+            employee.setPhoto(rs.getBytes("photo"));
 
             return employee;
 
@@ -98,6 +107,10 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
                 employee.setUsername(rs.getString("username"));
                 employee.setPassword(rs.getString("password"));
                 employee.setManager(rs.getBoolean("isManager"));
+                employee.setFirstname(rs.getString("firstname"));
+                employee.setLastname(rs.getString("lastname"));
+                employee.setEmail(rs.getString("email"));
+                employee.setPhoto(rs.getBytes("photo"));
                 employeeList.add(employee);
             }
 
@@ -114,15 +127,25 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
     public Employee updateEmployee(Employee employee) {
 
         try(Connection connection = ConnectionFactory.getConnection()){
-            //UPDATE books SET title = 'It Ends with Us', author = 'Colleen Hoover' WHERE id = 2;
-            String sql = "update employees set username=?, password=?, isManager=? where id=?";
+
+
+            System.out.println(employee);
+
+            String sql = "update employees set username=?, password=?, isManager=?, " +
+                         "firstname=?, lastname=?, email=?, photo=? where id=?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, employee.getUsername());
             preparedStatement.setString(2,employee.getPassword());
             preparedStatement.setBoolean(3,employee.isManager());
-            preparedStatement.setInt(4,employee.getId());
+
+            preparedStatement.setString(4,employee.getFirstname());
+            preparedStatement.setString(5,employee.getLastname());
+            preparedStatement.setString(6,employee.getEmail());
+            preparedStatement.setBytes(7, employee.getPhoto());
+
+            preparedStatement.setInt(8,employee.getId());
 
             preparedStatement.executeUpdate();
 
@@ -138,7 +161,6 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
     public Employee changeEmployeeRole(Employee employee, boolean toManager) {
 
         try(Connection connection = ConnectionFactory.getConnection()){
-            //UPDATE books SET title = 'It Ends with Us', author = 'Colleen Hoover' WHERE id = 2;
             String sql = "update employees set isManager=? where id=?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -155,6 +177,31 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
         }
         return null;
     }
+
+    @Override
+    public Employee appendPhotoToEmployee(Employee employee, byte[] bytes) {
+
+        try(Connection connection = ConnectionFactory.getConnection()){
+
+            String sql = "update employees set photo=? where id=?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setBytes(1, bytes);
+            preparedStatement.setInt(2, employee.getId());
+
+            preparedStatement.executeUpdate();
+
+            employee.setPhoto(bytes);
+            return employee;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
     @Override
     public boolean deleteEmployeeById(int id) {
 

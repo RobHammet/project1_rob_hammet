@@ -3,16 +3,10 @@ package dev.hammet.controllers;
 import com.google.gson.Gson;
 import dev.hammet.driver.Driver;
 import dev.hammet.entities.Employee;
-import dev.hammet.util.ConnectionFactory;
+import dev.hammet.entities.ReimbursementRequest;
 import io.javalin.http.Handler;
-import org.eclipse.jetty.server.Authentication;
-
-import javax.jws.soap.SOAPBinding;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -30,11 +24,12 @@ public class EmployeeController {
 
     public Handler registerNewUserHandler = (ctx) ->{
 
-        String json = ctx.body();
-        Gson gson = new Gson();
-        UserAndPassword userAndPassword = gson.fromJson(json, UserAndPassword.class);
+
 
         try {
+            String json = ctx.body();
+            Gson gson = new Gson();
+            UserAndPassword userAndPassword = gson.fromJson(json, UserAndPassword.class);
             Employee newUser = Driver.employeeService.registerNewUser(userAndPassword.username, userAndPassword.password);
             if (newUser == null) {
                 ctx.status(401);
@@ -102,28 +97,75 @@ public class EmployeeController {
         if (Driver.loggedInEmployee != null) {
 
             Employee employee = Driver.employeeService.getEmployeeById(Driver.loggedInEmployee.getId());
-            UserAndPassword userAndPassword = new UserAndPassword(employee.getUsername(), employee.getPassword());
-            Gson gson = new Gson();
-            String json = gson.toJson(userAndPassword);
-            ctx.result(json);
+           // UserAndPassword userAndPassword = new UserAndPassword(employee.getUsername(), employee.getPassword());
+
+           // Gson gson = new Gson();
+           // String json = gson.toJson(userAndPassword);
+           // ctx.result(json);
+            ctx.result(makeHtmlTableOutputOfEmployeeProfile(employee));
 
         }
     };
 
+
+
+    private String makeHtmlTableOutputOfEmployeeProfile(Employee employee) throws UnsupportedEncodingException {
+
+        String html = "<html>\n" +
+                "<head><style>\n" +
+                "table, th, td {\n" +
+                "  border: 1px solid black;\n" +
+                "  border-radius: 10px;\n" +
+                "}\n" +
+                "</style></head>" +
+                "<body bgcolor=lightgray>\n" +
+                "\n" +
+                "    <h3>Profile</h3>\n" +
+                "    \n" +
+                "    <table style=\"width:100%\">\n" +
+                "        <tr>\n" +
+                "            <th>Username</th>\n" +
+                "            <th>Level</th>\n" +
+                "            <th>First Name</th>\n" +
+                "            <th>Last Name</th>\n" +
+                "            <th>Email</th>\n" +
+                "            <th>Photo</th>\n" +
+                "        </tr>\n"  +
+                "            <td>" + employee.getUsername() +"</td>\n" +
+                "            <td>" + (employee.isManager()? "Manager" : "Employee") + "</td>\n" +
+                "            <td>" + employee.getFirstname() + "</td>\n" +
+                "            <td>" + employee.getLastname() + "</td>\n" +
+                "            <td>" + employee.getEmail() + "</td>\n" +
+                "            <td>" + (employee.getPhoto() != null? "<img src=\"" + "data:image/jpeg;base64," + bytesToString(employee.getPhoto()) + "\" height=50 width=50>" : "no image") +
+                "</td>\n" +
+                "        </tr>\n" +
+                "    </table>\n" +
+                "</body>\n" +
+                "</html>";
+
+        return html;
+    }
+    private String bytesToString (byte[] bytes) throws UnsupportedEncodingException {
+        if (bytes == null)
+            return "";
+        if (bytes.length == 0)
+            return "";
+
+        Base64.Encoder encoder = Base64.getEncoder();
+        String str = new String(encoder.encode(bytes), "UTF-8");
+
+        return str;
+    }
     public Handler updateProfileHandler = (ctx) ->{
 
-        String json = ctx.body();
-        Gson gson = new Gson();
-        UserAndPassword userAndPassword = gson.fromJson(json, UserAndPassword.class);
-
         try {
-            // move to service
-            // make a new employee object based on logged-in user, updating user & pwd
-            Employee modifiedEmployee = new Employee(Driver.loggedInEmployee.getId(),
-                                                    userAndPassword.username,
-                                                    userAndPassword.password,
-                                                    Driver.loggedInEmployee.isManager());
-            Employee updatedEmployee = Driver.employeeService.updateEmployee(modifiedEmployee);
+
+            String json = ctx.body();
+            Gson gson = new Gson();
+            Employee employee = gson.fromJson(json, Employee.class);
+
+
+            Employee updatedEmployee = Driver.employeeService.updateEmployee(employee);
             Driver.loggedInEmployee = updatedEmployee;
 
 
@@ -135,6 +177,29 @@ public class EmployeeController {
             ctx.result("Profile update unsuccessful: " + e.getMessage() );
         }
     };
+
+
+    public Handler uploadPhotoHandler = (ctx) ->{
+
+        byte[] bytes = ctx.bodyAsBytes();  // ctx.body().getBytes();
+
+        Employee employee = Driver.loggedInEmployee;
+        Employee updatedEmployee = Driver.employeeService.appendPhotoToEmployee(employee, bytes);
+     //   ReimbursementRequest reimbursementRequest = Driver.reimbursementRequestService.getReimbursementRequestById(id);
+     //   ReimbursementRequest updatedReimbursementRequest = Driver.reimbursementRequestService.appendReceiptToReimbursementRequest(reimbursementRequest, bytes);
+
+        bytes = null;
+        bytes = employee.getPhoto();
+
+        String encodedFile = bytesToString(bytes);
+
+
+        String html = "<html><h2>Profile photo set</h2><br><img src=\"data:image/jpeg;base64," + encodedFile + "\"></html>";
+        ctx.result(html);
+
+
+    };
+
     public Handler getAllEmployees = (ctx) ->{
         List<Employee> employeeList = Driver.employeeService.getAllEmployees();
         Gson gson = new Gson();

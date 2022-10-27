@@ -51,6 +51,11 @@ public class EmployeeDAOLocal implements EmployeeDAO {
         return null;
     }
 
+    @Override
+    public Employee appendPhotoToEmployee(Employee employee, byte[] bytes) {
+        return null;
+    }
+
 
     @Override
     public boolean deleteEmployeeById(int id) {

@@ -19,6 +19,8 @@ public interface EmployeeDAO {
     Employee updateEmployee(Employee employee);
     Employee changeEmployeeRole(Employee employee, boolean toManager);
 
+    Employee appendPhotoToEmployee(Employee employee, byte[] bytes);
+
     //DELETE
     boolean deleteEmployeeById(int id);
 

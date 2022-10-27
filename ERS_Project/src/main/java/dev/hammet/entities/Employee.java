@@ -1,23 +1,36 @@
 package dev.hammet.entities;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Employee {
     private int id;
 
-    private String username, password;
+    private String username, password, firstname, lastname, email;
+
+    private byte[] photo;
 
     private boolean isManager;
 
     public Employee() {
 
     }
-
     public Employee(int id, String username, String password, boolean isManager) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.photo = null;
+    }
+
+    public Employee(int id, String username, String password, boolean isManager, String firstname, String lastname, String email) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
         this.isManager = isManager;
+        this.photo = null;
     }
 
     @Override
@@ -26,8 +39,44 @@ public class Employee {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", photo=" + (photo != null? photo.length : "[]" ) +
                 ", isManager=" + isManager +
                 '}';
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     @Override
