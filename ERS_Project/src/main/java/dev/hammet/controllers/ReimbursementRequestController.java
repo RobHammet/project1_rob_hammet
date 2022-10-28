@@ -62,16 +62,23 @@ public class ReimbursementRequestController {
                 "    <h3>Reimbursement Requests</h3>\n" +
                 "    \n" +
                 "    <table style=\"width:100%\">\n" +
-                "        <tr>\n" +
+                "        <tr bgcolor=orange>\n" +
                 "            <th>Employee</th>\n" +
                 "            <th>Type</th>\n" +
                 "            <th>Description</th>\n" +
                 "            <th>Amount</th>\n" +
-                "            <th>Status</th>\n" +
+                "            <th>Status  (rID)</th>\n" +
                 "            <th>Receipt</th>\n" +
                 "        </tr>\n" ;
 
         for (ReimbursementRequest r: requestList) {
+
+            String statusColor = "darkorange";
+            if (r.getStatus() == ReimbursementRequest.Status.DENIED)
+                statusColor = "darkred";
+            else if (r.getStatus() == ReimbursementRequest.Status.APPROVED)
+                statusColor = "darkgreen";
+            String statusColorModLine = "style=\"color:" + statusColor + ";\"";
 
 
             html +=     "        <tr>\n" +
@@ -79,7 +86,7 @@ public class ReimbursementRequestController {
                     "            <td>" + r.getType() + "</td>\n" +
                     "            <td>" + r.getDescription() + "</td>\n" +
                     "            <td>" +r.getAmount() + "</td>\n" +
-                    "            <td>" + r.getStatus() + "</td>\n" +
+                    "            <td " + statusColorModLine + ">" + r.getStatus() + "  (" + r.getId() + ")</td>\n" +
                     "            <td>" + (r.getReceiptImage() != null? "<img src=\"" + "data:image/jpeg;base64," + bytesToString(r.getReceiptImage()) + "\" height=50 width=50>" : "no image") +
                     "</td>\n" +
                     "        </tr>\n";
@@ -105,7 +112,7 @@ public class ReimbursementRequestController {
                 "    <h3>My Reimbursement Requests</h3>\n" +
                 "    \n" +
                 "    <table style=\"width:100%\">\n" +
-                "        <tr>\n" +
+                "        <tr bgcolor=orange>\n" +
                 "            <th>Request ID #</th>\n" +
                 "            <th>Type</th>\n" +
                 "            <th>Description</th>\n" +
@@ -116,13 +123,19 @@ public class ReimbursementRequestController {
 
         for (ReimbursementRequest r: requestList) {
 
+            String statusColor = "darkorange";
+            if (r.getStatus() == ReimbursementRequest.Status.DENIED)
+                statusColor = "darkred";
+            else if (r.getStatus() == ReimbursementRequest.Status.APPROVED)
+                statusColor = "darkgreen";
+            String statusColorModLine = "style=\"color:" + statusColor + ";\"";
 
             html +=     "        <tr>\n" +
                     "            <td>" + r.getId() + "</td>\n" +
                     "            <td>" + r.getType() + "</td>\n" +
                     "            <td>" + r.getDescription() + "</td>\n" +
                     "            <td>" +r.getAmount() + "</td>\n" +
-                    "            <td>" + r.getStatus() + "</td>\n" +
+                    "            <td " + statusColorModLine + ">" + r.getStatus() + "</td>\n" +
                     "            <td>" + (r.getReceiptImage() != null? "<img src=\"" + "data:image/jpeg;base64," + bytesToString(r.getReceiptImage()) + "\" height=50 width=50>" : "no image") +
                     "</td>\n" +
                     "        </tr>\n";

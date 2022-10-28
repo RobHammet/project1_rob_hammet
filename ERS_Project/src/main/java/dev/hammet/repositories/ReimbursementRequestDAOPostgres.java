@@ -300,7 +300,7 @@ public class ReimbursementRequestDAOPostgres implements ReimbursementRequestDAO 
 
     @Override
     public boolean changeReimbursementRequestStatus(int id, ReimbursementRequest.Status status) {
-
+        // tickets.getId()   tickets.getStatus()
 
         try(Connection connection = ConnectionFactory.getConnection()){
             String sql = "update reimbursement_requests set r_status=? where r_id=" + id;

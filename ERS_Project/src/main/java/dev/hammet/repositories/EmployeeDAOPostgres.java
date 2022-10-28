@@ -111,6 +111,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
                 employee.setLastname(rs.getString("lastname"));
                 employee.setEmail(rs.getString("email"));
                 employee.setPhoto(rs.getBytes("photo"));
+
                 employeeList.add(employee);
             }
 
@@ -135,6 +136,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
                          "firstname=?, lastname=?, email=?, photo=? where id=?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
 
             preparedStatement.setString(1, employee.getUsername());
             preparedStatement.setString(2,employee.getPassword());
@@ -169,6 +171,9 @@ public class EmployeeDAOPostgres implements EmployeeDAO {
             preparedStatement.setInt(2,employee.getId());
 
             preparedStatement.executeUpdate();
+
+            // set return object
+            employee = getEmployeeById(employee.getId());
 
             return employee;
         }

@@ -10,14 +10,7 @@ import java.util.Base64;
 import java.util.List;
 
 
-class UserAndPassword {
-    String username;
-    String password;
-    UserAndPassword(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-}
+
 
 public class EmployeeController {
 
@@ -29,8 +22,8 @@ public class EmployeeController {
         try {
             String json = ctx.body();
             Gson gson = new Gson();
-            UserAndPassword userAndPassword = gson.fromJson(json, UserAndPassword.class);
-            Employee newUser = Driver.employeeService.registerNewUser(userAndPassword.username, userAndPassword.password);
+            Employee attemptRegisterEmployee = gson.fromJson(json, Employee.class);
+            Employee newUser = Driver.employeeService.registerNewUser(attemptRegisterEmployee.getUsername(), attemptRegisterEmployee.getPassword());
             if (newUser == null) {
                 ctx.status(401);
                 ctx.result("Register unsuccessful: username already exists" );
@@ -51,9 +44,9 @@ public class EmployeeController {
 
             String json = ctx.body();
             Gson gson = new Gson();
-            UserAndPassword userAndPassword = gson.fromJson(json, UserAndPassword.class);
+            Employee attemptLoginEmployee = gson.fromJson(json, Employee.class);
 
-            int ret = Driver.employeeService.authenticateUser(userAndPassword.username, userAndPassword.password);
+            int ret = Driver.employeeService.authenticateUser(attemptLoginEmployee.getUsername(), attemptLoginEmployee.getPassword());
 
             if(ret == 2){
                 ctx.result("Logged in successfully as " + Driver.loggedInEmployee.getUsername() + " *" +
@@ -123,7 +116,7 @@ public class EmployeeController {
                 "    <h3>Profile</h3>\n" +
                 "    \n" +
                 "    <table style=\"width:100%\">\n" +
-                "        <tr>\n" +
+                "        <tr bgcolor=orange>\n" +
                 "            <th>Username</th>\n" +
                 "            <th>Level</th>\n" +
                 "            <th>First Name</th>\n" +
